@@ -376,15 +376,16 @@ function ChainSlide({ slide }: { slide: typeof coreSlides[number] }) {
               {[
                 { t: "Automation", d: "Reducerar manuellt arbete i flödet" },
                 { t: "Agentic AI", d: "Beslutsstöd och autonom handling" },
-                { t: "Process Intelligence", d: "Synliggör hur processerna faktiskt går" },
               ].map((t) => (
                 <div key={t.t} className="px-5 py-4 rounded-xl bg-gradient-to-br from-drake-tint-soft to-white border border-drake-tint-strong">
                   <p className="font-display uppercase tracking-wide text-sm text-drake-deep">{t.t}</p>
                   <p className="text-xs text-drake-mid mt-1">{t.d}</p>
                 </div>
               ))}
+              <ProcessIntelligenceCard />
             </div>
           </motion.div>
+
         </motion.div>
       </motion.div>
       <SlideFooterLogo />
