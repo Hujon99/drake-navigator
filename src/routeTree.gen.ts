@@ -15,7 +15,6 @@ import { Route as ExportRouteImport } from './routes/export'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as SlideNRouteImport } from './routes/slide.$n'
 import { Route as ModulSlugRouteImport } from './routes/modul.$slug'
-import { Route as ExportPrintRouteImport } from './routes/export.print'
 import { Route as CaseSlugRouteImport } from './routes/case.$slug'
 
 const HubRoute = HubRouteImport.update({
@@ -48,11 +47,6 @@ const ModulSlugRoute = ModulSlugRouteImport.update({
   path: '/modul/$slug',
   getParentRoute: () => rootRouteImport,
 } as any)
-const ExportPrintRoute = ExportPrintRouteImport.update({
-  id: '/print',
-  path: '/print',
-  getParentRoute: () => ExportRoute,
-} as any)
 const CaseSlugRoute = CaseSlugRouteImport.update({
   id: '/case/$slug',
   path: '/case/$slug',
@@ -61,32 +55,29 @@ const CaseSlugRoute = CaseSlugRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
-  '/export': typeof ExportRouteWithChildren
+  '/export': typeof ExportRoute
   '/export-print': typeof ExportPrintRoute
   '/hub': typeof HubRoute
   '/case/$slug': typeof CaseSlugRoute
-  '/export/print': typeof ExportPrintRoute
   '/modul/$slug': typeof ModulSlugRoute
   '/slide/$n': typeof SlideNRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
-  '/export': typeof ExportRouteWithChildren
+  '/export': typeof ExportRoute
   '/export-print': typeof ExportPrintRoute
   '/hub': typeof HubRoute
   '/case/$slug': typeof CaseSlugRoute
-  '/export/print': typeof ExportPrintRoute
   '/modul/$slug': typeof ModulSlugRoute
   '/slide/$n': typeof SlideNRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
-  '/export': typeof ExportRouteWithChildren
+  '/export': typeof ExportRoute
   '/export-print': typeof ExportPrintRoute
   '/hub': typeof HubRoute
   '/case/$slug': typeof CaseSlugRoute
-  '/export/print': typeof ExportPrintRoute
   '/modul/$slug': typeof ModulSlugRoute
   '/slide/$n': typeof SlideNRoute
 }
@@ -98,7 +89,6 @@ export interface FileRouteTypes {
     | '/export-print'
     | '/hub'
     | '/case/$slug'
-    | '/export/print'
     | '/modul/$slug'
     | '/slide/$n'
   fileRoutesByTo: FileRoutesByTo
@@ -108,7 +98,6 @@ export interface FileRouteTypes {
     | '/export-print'
     | '/hub'
     | '/case/$slug'
-    | '/export/print'
     | '/modul/$slug'
     | '/slide/$n'
   id:
@@ -118,14 +107,13 @@ export interface FileRouteTypes {
     | '/export-print'
     | '/hub'
     | '/case/$slug'
-    | '/export/print'
     | '/modul/$slug'
     | '/slide/$n'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
-  ExportRoute: typeof ExportRouteWithChildren
+  ExportRoute: typeof ExportRoute
   ExportPrintRoute: typeof ExportPrintRoute
   HubRoute: typeof HubRoute
   CaseSlugRoute: typeof CaseSlugRoute
@@ -177,13 +165,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ModulSlugRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/export/print': {
-      id: '/export/print'
-      path: '/print'
-      fullPath: '/export/print'
-      preLoaderRoute: typeof ExportPrintRouteImport
-      parentRoute: typeof ExportRoute
-    }
     '/case/$slug': {
       id: '/case/$slug'
       path: '/case/$slug'
@@ -194,20 +175,9 @@ declare module '@tanstack/react-router' {
   }
 }
 
-interface ExportRouteChildren {
-  ExportPrintRoute: typeof ExportPrintRoute
-}
-
-const ExportRouteChildren: ExportRouteChildren = {
-  ExportPrintRoute: ExportPrintRoute,
-}
-
-const ExportRouteWithChildren =
-  ExportRoute._addFileChildren(ExportRouteChildren)
-
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
-  ExportRoute: ExportRouteWithChildren,
+  ExportRoute: ExportRoute,
   ExportPrintRoute: ExportPrintRoute,
   HubRoute: HubRoute,
   CaseSlugRoute: CaseSlugRoute,
@@ -217,3 +187,13 @@ const rootRouteChildren: RootRouteChildren = {
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
+
+import type { getRouter } from './router.tsx'
+import type { startInstance } from './start.ts'
+declare module '@tanstack/react-start' {
+  interface Register {
+    ssr: true
+    router: Awaited<ReturnType<typeof getRouter>>
+    config: Awaited<ReturnType<typeof startInstance.getOptions>>
+  }
+}
