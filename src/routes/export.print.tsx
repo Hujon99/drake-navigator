@@ -45,7 +45,8 @@ function ExportPrintPage() {
         // Auto-print may be blocked (e.g. iframe). User can click the toolbar button.
       }
     };
-    const fontsReady = (document as Document & { fonts?: { ready: Promise<unknown> } }).fonts?.ready;
+    const fontsReady = (document as Document & { fonts?: { ready: Promise<unknown> } }).fonts
+      ?.ready;
     const queuePrint = () => window.setTimeout(trigger, 250);
     window.setTimeout(trigger, 900);
     if (document.readyState === "complete") queuePrint();
@@ -115,7 +116,10 @@ function ExportPrintPage() {
           </span>
         </div>
         <div className="flex items-center gap-3">
-          <Link to="/export" className="text-xs font-display uppercase tracking-[0.14em] px-3 py-2 rounded hover:bg-white/10">
+          <Link
+            to="/export"
+            className="text-xs font-display uppercase tracking-[0.14em] px-3 py-2 rounded hover:bg-white/10"
+          >
             ← Tillbaka
           </Link>
           <button
@@ -130,8 +134,11 @@ function ExportPrintPage() {
       {/* Info banner — visible until user prints */}
       {!printed && (
         <div className="no-print bg-drake-tint-soft border-b border-drake-line px-6 py-4 text-center text-sm text-drake-deep">
-          {printAttempted ? "Om utskriftsdialogen inte öppnades — klicka " : "Utskriftsdialogen startas automatiskt. Om inget händer — klicka "}
-          <strong>"Skriv ut / Spara som PDF"</strong> uppe till höger. Välj <em>"Spara som PDF"</em> som destination.
+          {printAttempted
+            ? "Om utskriftsdialogen inte öppnades — klicka "
+            : "Utskriftsdialogen startas automatiskt. Om inget händer — klicka "}
+          <strong>"Skriv ut / Spara som PDF"</strong> uppe till höger. Välj <em>"Spara som PDF"</em>{" "}
+          som destination.
         </div>
       )}
 
@@ -200,11 +207,15 @@ function CoverPage({
 
           <div className="mt-12 grid grid-cols-2 gap-8 max-w-xl">
             <div>
-              <p className="text-[10px] font-display uppercase tracking-[0.18em] text-drake-sky">Datum</p>
+              <p className="text-[10px] font-display uppercase tracking-[0.18em] text-drake-sky">
+                Datum
+              </p>
               <p className="text-white mt-1 text-base">{dateLabel}</p>
             </div>
             <div>
-              <p className="text-[10px] font-display uppercase tracking-[0.18em] text-drake-sky">Avsnitt</p>
+              <p className="text-[10px] font-display uppercase tracking-[0.18em] text-drake-sky">
+                Avsnitt
+              </p>
               <p className="text-white mt-1 text-base">{entries.length} st</p>
             </div>
           </div>
@@ -258,10 +269,11 @@ function ModulePage({ module: m }: { module: (typeof modules)[number] }) {
         <p className="da-eyebrow mb-3">Vad vi gör</p>
         <div className="grid grid-cols-3 gap-4">
           {m.solution.map((s, i) => (
-            <div key={s.heading} className="rounded-lg border border-drake-line p-4 bg-drake-wash/50">
-              <span className="font-display text-drake-sky text-xs">
-                0{i + 1}
-              </span>
+            <div
+              key={s.heading}
+              className="rounded-lg border border-drake-line p-4 bg-drake-wash/50"
+            >
+              <span className="font-display text-drake-sky text-xs">0{i + 1}</span>
               <h4 className="da-display text-base mt-2 text-drake-ink">{s.heading}</h4>
               <p className="text-xs text-drake-mid mt-2 leading-relaxed">{s.body}</p>
             </div>
@@ -274,9 +286,7 @@ function ModulePage({ module: m }: { module: (typeof modules)[number] }) {
         <div className="grid grid-cols-3 gap-4">
           {m.outcome.map((o) => (
             <div key={o.label} className="border-t-2 border-drake-sky pt-3">
-              {o.metric && (
-                <p className="font-display text-2xl text-drake-deep">{o.metric}</p>
-              )}
+              {o.metric && <p className="font-display text-2xl text-drake-deep">{o.metric}</p>}
               <p className="text-xs font-display uppercase tracking-[0.12em] text-drake-mid mt-1">
                 {o.label}
               </p>
@@ -295,7 +305,10 @@ function ModulePage({ module: m }: { module: (typeof modules)[number] }) {
           <p className="da-eyebrow mb-2">Partners & verktyg</p>
           <div className="flex flex-wrap gap-1.5">
             {m.partners.map((p) => (
-              <span key={p} className="text-[11px] px-2 py-1 rounded bg-drake-wash text-drake-mid border border-drake-line">
+              <span
+                key={p}
+                className="text-[11px] px-2 py-1 rounded bg-drake-wash text-drake-mid border border-drake-line"
+              >
                 {p}
               </span>
             ))}
@@ -348,7 +361,10 @@ function CasePage({ caseData: c }: { caseData: NonNullable<ReturnType<typeof cas
         <p className="da-eyebrow mb-2">Teknik</p>
         <div className="flex flex-wrap gap-1.5">
           {c.tech.map((t) => (
-            <span key={t} className="text-[11px] px-2 py-1 rounded bg-drake-wash text-drake-mid border border-drake-line">
+            <span
+              key={t}
+              className="text-[11px] px-2 py-1 rounded bg-drake-wash text-drake-mid border border-drake-line"
+            >
               {t}
             </span>
           ))}
@@ -387,7 +403,11 @@ function formatSwedishDate(iso: string): string {
   try {
     const d = new Date(iso);
     if (Number.isNaN(d.getTime())) return iso;
-    return new Intl.DateTimeFormat("sv-SE", { year: "numeric", month: "long", day: "numeric" }).format(d);
+    return new Intl.DateTimeFormat("sv-SE", {
+      year: "numeric",
+      month: "long",
+      day: "numeric",
+    }).format(d);
   } catch {
     return iso;
   }
