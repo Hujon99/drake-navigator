@@ -4,7 +4,7 @@ Interaktivt säljstöd för Drake Analytics. En "choose your own adventure"-pres
 
 ## Struktur
 
-- **Kärnsekvens** (`/slide/1` → `/slide/5`): linjär intro — From Insight to Action, Vilka vi är, Hela kedjan, Partnerskap, Kundens fokus.
+- **Kärnsekvens** (`/slide/1` → `/slide/4`): linjär intro — From Insight to Action, Vilka vi är, Hela kedjan, Partnerskap. Sista sliden leder direkt till områdeskartan.
 - **Områdeskarta / Hub** (`/hub`): central navigationsyta till de sex erbjudandemodulerna.
 - **Modulsidor** (`/modul/<slug>`): one-pagers med Problem → Vad vi gör → Exempel/utfall → Nästa steg.
 - **Kundcase** (`/case/<slug>`): resultatdrivna case kopplade till en eller flera moduler.
@@ -22,7 +22,7 @@ Allt textinnehåll bor som typade TypeScript-objekt — inga JSX-ändringar beh�
 
 | Fil | Vad |
 | --- | --- |
-| `src/content/core-slides.ts` | Texterna i kärnsekvensen (slides 1–5). |
+| `src/content/core-slides.ts` | Texterna i kärnsekvensen (slides 1–4). |
 | `src/content/modules.ts` | De sex modulerna: tagline, problem, lösningssektioner, utfall, nästa steg, partners. |
 | `src/content/cases.ts` | Kundcase: client, utmaning, approach, resultat, teknik. |
 | `src/content/partners.ts` | Partner-chips grupperade efter kategori. |
@@ -33,7 +33,7 @@ Allt textinnehåll bor som typade TypeScript-objekt — inga JSX-ändringar beh�
 2. Lägg till ett objekt i `modules`-arrayen i `src/content/modules.ts`.
 3. Lägg till motsvarande kundcase i `cases.ts` (eller peka `caseSlug` mot ett befintligt).
 
-Modulen dyker automatiskt upp på hub-sidan, i kundens fokus-slide (slide 5) och får en egen route på `/modul/<slug>`.
+Modulen dyker automatiskt upp på hub-sidan (`/hub`) och får en egen route på `/modul/<slug>`.
 
 ### Lägga till ett nytt kundcase
 
@@ -43,12 +43,12 @@ Modulen dyker automatiskt upp på hub-sidan, i kundens fokus-slide (slide 5) och
 
 ## Designsystem
 
-Drake-färger, typsnitt (Share Bold + Roboto) och tokens ligger i `src/styles.css`. Logos och bilder i `src/assets/drake/`.
+Drake-färger, typsnitt (Barlow Condensed + Roboto) och tokens ligger i `src/styles.css`. Logos och bilder i `src/assets/drake/`.
 
 - Primär: `#50BCBD` (Drake Sky)
 - Accent: `#168896` (Drake Ground)
 - Hero/closing: `#0E5F66` (Drake Deep) / `#5E5E5E` (Closing Gray)
-- Headings: Share Bold UPPERCASE
+- Headings: Barlow Condensed UPPERCASE
 - Brödtext: Roboto
 
 ## Vad som inte ingår (v1)
