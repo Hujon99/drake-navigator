@@ -44,12 +44,17 @@ function HubPage() {
                 to="/modul/$slug"
                 params={{ slug: m.slug }}
                 preload="intent"
-                className="group block h-full rounded-2xl border border-drake-line bg-white p-7 hover:border-drake-sky hover:shadow-lg transition-all relative overflow-hidden"
+                className="group block h-full rounded-2xl border border-drake-line bg-white p-7 hover:border-drake-sky hover:shadow-[0_30px_60px_-30px_rgba(80,188,189,0.45)] hover:-translate-y-1 transition-all relative overflow-hidden"
               >
-                <div className="absolute inset-0 bg-gradient-to-br from-drake-tint-soft to-transparent opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none" />
+                {/* Hover gradient wash */}
+                <div className="absolute inset-0 bg-gradient-to-br from-drake-tint-soft via-white to-transparent opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none" />
+                {/* Outline number */}
+                <span className="absolute -right-3 -bottom-6 font-display text-[120px] leading-none text-drake-tint-soft group-hover:text-drake-tint-strong transition-colors pointer-events-none select-none">
+                  {m.number}
+                </span>
                 <div className="relative">
                   <div className="flex items-start justify-between mb-6">
-                    <span className="font-display text-drake-sky text-3xl">{m.number}</span>
+                    <span className="font-display text-drake-sky text-2xl tracking-wide">{m.number}</span>
                     <ArrowRight size={18} className="text-drake-mute group-hover:text-drake-sky group-hover:translate-x-1 transition-all" />
                   </div>
                   <h3 className="da-display text-2xl text-drake-ink">{m.title}</h3>
