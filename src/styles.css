@@ -123,18 +123,18 @@ html { -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; 
 /* Drake utility classes */
 @layer components {
   .da-display {
-    font-family: "Share", Impact, sans-serif;
+    font-family: "Barlow Condensed", "Arial Narrow", Impact, sans-serif;
     font-weight: 700;
     text-transform: uppercase;
-    letter-spacing: 0.01em;
-    line-height: 1.05;
+    letter-spacing: 0.005em;
+    line-height: 1.0;
     color: var(--da-dark-gray);
   }
   .da-eyebrow {
-    font-family: "Share", Impact, sans-serif;
-    font-weight: 700;
+    font-family: "Barlow Condensed", "Arial Narrow", Impact, sans-serif;
+    font-weight: 600;
     text-transform: uppercase;
-    letter-spacing: 0.14em;
+    letter-spacing: 0.16em;
     font-size: 12px;
     color: var(--da-drake-ground);
   }
