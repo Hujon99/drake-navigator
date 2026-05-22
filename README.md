@@ -22,7 +22,7 @@ Allt textinnehåll bor som typade TypeScript-objekt — inga JSX-ändringar beh�
 
 | Fil | Vad |
 | --- | --- |
-| `src/content/core-slides.ts` | Texterna i kärnsekvensen (slides 1–5). |
+| `src/content/core-slides.ts` | Texterna i kärnsekvensen (slides 1–4). |
 | `src/content/modules.ts` | De sex modulerna: tagline, problem, lösningssektioner, utfall, nästa steg, partners. |
 | `src/content/cases.ts` | Kundcase: client, utmaning, approach, resultat, teknik. |
 | `src/content/partners.ts` | Partner-chips grupperade efter kategori. |
