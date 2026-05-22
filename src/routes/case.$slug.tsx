@@ -3,6 +3,7 @@ import { motion } from "motion/react";
 import { ArrowLeft, ArrowRight } from "lucide-react";
 import { caseBySlug } from "@/content/cases";
 import { moduleBySlug } from "@/content/modules";
+import type { CaseContent, ModuleSlug } from "@/content/types";
 import { NavBar } from "@/components/drake/NavBar";
 import { useLenis } from "@/lib/use-lenis";
 import { fadeUp, stagger } from "@/lib/motion";
@@ -20,10 +21,11 @@ export const Route = createFileRoute("/case/$slug")({
 });
 
 function CasePage() {
-  const { case: c } = Route.useLoaderData();
+  const { case: c } = Route.useLoaderData() as { case: CaseContent };
   useLenis(true);
 
-  const linkedModules = c.modules.map((s) => moduleBySlug(s)!).filter(Boolean);
+  const linkedModules = c.modules.map((s: ModuleSlug) => moduleBySlug(s)!).filter(Boolean);
+
 
   return (
     <div className="min-h-screen bg-white">

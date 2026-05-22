@@ -4,6 +4,7 @@ import { useRef } from "react";
 import { ArrowRight, Check } from "lucide-react";
 import { moduleBySlug, modules } from "@/content/modules";
 import { caseBySlug } from "@/content/cases";
+import type { ModuleContent } from "@/content/types";
 import { NavBar } from "@/components/drake/NavBar";
 import { useLenis } from "@/lib/use-lenis";
 import { fadeUp, stagger } from "@/lib/motion";
