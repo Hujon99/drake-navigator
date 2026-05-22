@@ -12,7 +12,7 @@ import { PartnerGrid } from "@/components/drake/PartnerGrid";
 import { slideVariants, fadeUp, stagger } from "@/lib/motion";
 
 import cloud1 from "@/assets/drake/cloud-1.png";
-import cloud3 from "@/assets/drake/cloud-3.jpg";
+
 import nordics from "@/assets/drake/nordics-map.png";
 import dataHuman from "@/assets/drake/data-human.png";
 
