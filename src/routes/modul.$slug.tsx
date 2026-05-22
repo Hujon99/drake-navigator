@@ -22,7 +22,7 @@ export const Route = createFileRoute("/modul/$slug")({
 });
 
 function ModulePage() {
-  const { module: m } = Route.useLoaderData();
+  const { module: m } = Route.useLoaderData() as { module: ModuleContent };
   const linkedCase = caseBySlug(m.caseSlug);
   useLenis(true);
 
