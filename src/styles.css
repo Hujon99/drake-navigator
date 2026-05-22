@@ -108,6 +108,13 @@
     background: var(--da-drake-sky);
     color: #fff;
   }
+
+  /* Accessible focus ring on every interactive element */
+  :where(a, button, [role="button"], input, select, textarea, [tabindex]:not([tabindex="-1"])):focus-visible {
+    outline: 2px solid var(--da-drake-sky);
+    outline-offset: 3px;
+    border-radius: 4px;
+  }
 }
 
 /* Drake utility classes */
@@ -131,9 +138,9 @@
   .da-eyebrow-light { color: var(--da-drake-sky); }
   .da-ingress {
     font-family: "Roboto", sans-serif;
-    font-weight: 500;
-    font-size: 22px;
-    line-height: 1.4;
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 1.55;
     color: var(--da-mid-gray-2);
   }
   .da-rule {
@@ -141,6 +148,20 @@
     width: 56px;
     background: var(--da-drake-sky);
     display: inline-block;
+  }
+  .da-gradient-text {
+    background: linear-gradient(135deg, var(--da-drake-sky) 0%, var(--da-drake-ground) 60%, var(--da-drake-deep) 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+  .da-outline-number {
+    font-family: "Share", Impact, sans-serif;
+    font-weight: 700;
+    -webkit-text-stroke: 1.5px rgba(255,255,255,0.18);
+    color: transparent;
+    line-height: 0.85;
+    user-select: none;
   }
 }
 
@@ -150,18 +171,59 @@
   position: absolute;
   inset: 0;
   pointer-events: none;
-  opacity: 0.04;
+  opacity: 0.05;
   mix-blend-mode: overlay;
   background-image: radial-gradient(rgba(255,255,255,0.6) 1px, transparent 1px);
   background-size: 3px 3px;
 }
 
-/* Animated background blobs for cover */
+/* Soft vignette for cover */
+.da-vignette::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: radial-gradient(ellipse at center, transparent 40%, rgba(0,0,0,0.45) 100%);
+}
+
+/* Animated background blobs */
 @keyframes da-float {
   0%, 100% { transform: translate(0,0) scale(1); }
   50% { transform: translate(2%, -3%) scale(1.05); }
 }
 .da-blob { animation: da-float 18s ease-in-out infinite; }
+
+/* Pulsing dot for nordics map */
+@keyframes da-pulse {
+  0% { transform: scale(1); opacity: 0.8; }
+  70% { transform: scale(3); opacity: 0; }
+  100% { transform: scale(3); opacity: 0; }
+}
+.da-pulse-ring {
+  position: absolute;
+  inset: 0;
+  border-radius: 999px;
+  background: var(--da-drake-sky);
+  animation: da-pulse 2.6s ease-out infinite;
+}
+
+/* Dashed flowing line for value-chain connectors */
+@keyframes da-dash {
+  to { stroke-dashoffset: -20; }
+}
+.da-flow-line {
+  stroke-dasharray: 5 7;
+  animation: da-dash 1.4s linear infinite;
+}
+
+/* Respect reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .da-blob, .da-pulse-ring, .da-flow-line { animation: none !important; }
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    transition-duration: 0.001ms !important;
+  }
+}
 
 /* Print: each slide-section becomes its own page */
 @media print {

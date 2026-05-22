@@ -63,7 +63,7 @@ function CasePage() {
                 transition={{ delay: i * 0.08 }}
                 className="bg-white rounded-xl p-7 border border-drake-line"
               >
-                <p className="font-display text-5xl md:text-6xl text-drake-deep leading-none">{r.metric}</p>
+                <p className="font-display text-5xl md:text-6xl leading-none da-gradient-text">{r.metric}</p>
                 <p className="mt-3 text-drake-mid">{r.label}</p>
               </motion.div>
             ))}
