@@ -242,6 +242,85 @@ html { -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; 
   .lenis-prevent, html.lenis, html.lenis body { overflow: visible !important; height: auto !important; }
 }
 
+/* ─── Export module: portrait A4 print pages ─── */
+.export-print-root { background: #f3f3f3; min-height: 100vh; }
+.export-print-pages { max-width: 900px; margin: 0 auto; padding: 32px 0 64px; display: flex; flex-direction: column; gap: 24px; }
+.export-page {
+  background: #fff;
+  width: 210mm;
+  min-height: 297mm;
+  padding: 18mm 16mm 22mm;
+  position: relative;
+  box-shadow: 0 24px 60px -30px rgba(0,0,0,0.25);
+  margin: 0 auto;
+  color: var(--da-dark-gray);
+  display: flex;
+  flex-direction: column;
+}
+.export-page__footer {
+  position: absolute;
+  left: 16mm;
+  right: 16mm;
+  bottom: 10mm;
+  display: flex;
+  justify-content: space-between;
+  font-family: var(--font-display);
+  font-size: 9px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--da-mid-gray-1);
+  border-top: 1px solid var(--da-light-gray-2);
+  padding-top: 8px;
+}
+.export-cover {
+  padding: 0;
+  color: #fff;
+  overflow: hidden;
+}
+.export-cover__bg {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(80% 60% at 80% 20%, rgba(80,188,189,0.45), transparent 60%),
+    radial-gradient(60% 50% at 10% 90%, rgba(22,136,150,0.5), transparent 60%),
+    linear-gradient(160deg, #0e5f66 0%, #07343a 100%);
+}
+.export-cover__content {
+  position: relative;
+  padding: 18mm 16mm 22mm;
+  height: 297mm;
+  display: flex;
+  flex-direction: column;
+}
+
+@media print {
+  body.export-print-active {
+    background: #fff !important;
+  }
+  body.export-print-active .export-print-root { background: #fff; }
+  body.export-print-active .export-print-pages {
+    max-width: none;
+    padding: 0;
+    margin: 0;
+    gap: 0;
+  }
+  body.export-print-active .export-page {
+    box-shadow: none;
+    margin: 0;
+    page-break-after: always;
+    break-after: page;
+  }
+  body.export-print-active .export-page:last-child {
+    page-break-after: auto;
+    break-after: auto;
+  }
+  body.export-print-active {
+    /* Force portrait A4 with zero default margin (page content has its own padding) */
+  }
+  /* Override the global landscape @page rule for the export route */
+  @page { size: A4 portrait; margin: 0; }
+}
+
 /* ─── Leaflet / Drake map markers ─── */
 .drake-marker { position: relative; display: block; width: 16px; height: 16px; }
 .drake-marker__dot {
