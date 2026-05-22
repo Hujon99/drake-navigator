@@ -50,7 +50,7 @@ function ExportPage() {
   }
   function handleCreate() {
     const encoded = encodeExportState(state);
-    const url = `/export-print?s=${encodeURIComponent(encoded)}`;
+    const url = `/rapport?s=${encodeURIComponent(encoded)}`;
     // Open in a new tab so the report page is the only thing rendered there.
     const win = window.open(url, "_blank", "noopener");
     if (!win) {
