@@ -44,6 +44,22 @@ function ReportPage() {
         import("jspdf"),
       ]);
 
+      // Ensure all required font faces are loaded before rasterizing,
+      // otherwise html2canvas may fall back to system fonts mid-capture.
+      const fontSpecs = [
+        '500 16px "Barlow Condensed"',
+        '600 16px "Barlow Condensed"',
+        '700 16px "Barlow Condensed"',
+        '800 16px "Barlow Condensed"',
+        'italic 700 16px "Barlow Condensed"',
+        '300 16px "Roboto"',
+        '400 16px "Roboto"',
+        '500 16px "Roboto"',
+        '700 16px "Roboto"',
+        '900 16px "Roboto"',
+        'italic 400 16px "Roboto"',
+      ];
+      await Promise.all(fontSpecs.map((spec) => document.fonts.load(spec).catch(() => null)));
       await document.fonts.ready;
 
       const pages = Array.from(document.querySelectorAll<HTMLElement>(".print-page"));
@@ -65,6 +81,13 @@ function ReportPage() {
           onclone: (clonedDocument) => {
             clonedDocument.documentElement.classList.add("pdf-capture-mode");
             clonedDocument.body.classList.add("pdf-capture-mode");
+            // Re-inject Google Fonts inside the clone so the iframe renderer
+            // uses the same typography as the live page.
+            const fontLink = clonedDocument.createElement("link");
+            fontLink.rel = "stylesheet";
+            fontLink.href =
+              "https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,500;0,600;0,700;0,800;1,700&family=Roboto:ital,wght@0,300;0,400;0,500;0,700;0,900;1,400&display=swap";
+            clonedDocument.head.appendChild(fontLink);
             clonedDocument.querySelectorAll<HTMLElement>(".print-page").forEach((clonedPage) => {
               clonedPage.style.width = `${pdfPageWidth}px`;
               clonedPage.style.height = `${pdfPageHeight}px`;
