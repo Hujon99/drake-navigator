@@ -231,13 +231,23 @@ html { -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; 
 /* Print: each slide-section becomes its own page */
 @media print {
   @page { size: A4 landscape; margin: 0; }
+
+  /* Force every element to print background colors and images, regardless of
+     the browser's "Background graphics" checkbox in the print dialog. */
+  *,
+  *::before,
+  *::after {
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+    color-adjust: exact !important;
+    forced-color-adjust: none !important;
+  }
+
   html,
   body {
     width: 297mm;
     min-height: 210mm;
     background: #fff !important;
-    -webkit-print-color-adjust: exact !important;
-    print-color-adjust: exact !important;
   }
   .no-print, [data-no-print] { display: none !important; }
   .print-page {
@@ -248,19 +258,29 @@ html { -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; 
     overflow: hidden !important;
     page-break-after: always;
     break-after: page;
-    -webkit-print-color-adjust: exact !important;
-    print-color-adjust: exact !important;
   }
   .print-page > * {
     width: 297mm !important;
     height: 210mm !important;
     min-height: 210mm !important;
   }
-  .print-page * {
-    -webkit-print-color-adjust: exact !important;
-    print-color-adjust: exact !important;
-  }
   .lenis-prevent, html.lenis, html.lenis body { overflow: visible !important; height: auto !important; }
+}
+
+/* Apply color-adjust outside @media print as well, so html2canvas / preview
+   captures keep gradients and background images. */
+.print-page,
+.print-page *,
+.print-page *::before,
+.print-page *::after,
+.pdf-capture-mode,
+.pdf-capture-mode *,
+.pdf-capture-mode *::before,
+.pdf-capture-mode *::after {
+  -webkit-print-color-adjust: exact !important;
+  print-color-adjust: exact !important;
+  color-adjust: exact !important;
+  forced-color-adjust: none !important;
 }
 
 .pdf-capture-mode,
