@@ -44,6 +44,22 @@ function ReportPage() {
         import("jspdf"),
       ]);
 
+      // Ensure all required font faces are loaded before rasterizing,
+      // otherwise html2canvas may fall back to system fonts mid-capture.
+      const fontSpecs = [
+        '500 16px "Barlow Condensed"',
+        '600 16px "Barlow Condensed"',
+        '700 16px "Barlow Condensed"',
+        '800 16px "Barlow Condensed"',
+        'italic 700 16px "Barlow Condensed"',
+        '300 16px "Roboto"',
+        '400 16px "Roboto"',
+        '500 16px "Roboto"',
+        '700 16px "Roboto"',
+        '900 16px "Roboto"',
+        'italic 400 16px "Roboto"',
+      ];
+      await Promise.all(fontSpecs.map((spec) => document.fonts.load(spec).catch(() => null)));
       await document.fonts.ready;
 
       const pages = Array.from(document.querySelectorAll<HTMLElement>(".print-page"));
