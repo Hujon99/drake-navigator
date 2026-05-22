@@ -21,7 +21,7 @@ export function BrandLogo({ brand, kind, tone = "color", size = "md", className 
   const meta: BrandMeta | undefined = (kind === "customer" ? CUSTOMERS : PARTNERS)[brand];
   if (!meta) return null;
 
-  const svgUrl = kind === "partner" ? getPartnerSvg(brand) : undefined;
+  const svgUrl = kind === "partner" ? getPartnerSvg(brand) : getCustomerSvg(brand);
   const sz = sizeMap[size];
 
   // Text chip wrapper styles
