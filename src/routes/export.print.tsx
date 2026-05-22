@@ -21,6 +21,11 @@ function ExportPrintPage() {
   const [printed, setPrinted] = useState(false);
   const [printAttempted, setPrintAttempted] = useState(false);
 
+  function requestPrint() {
+    window.focus();
+    window.print();
+  }
+
   useEffect(() => {
     document.body.classList.add("export-print-active");
     return () => document.body.classList.remove("export-print-active");
@@ -35,8 +40,7 @@ function ExportPrintPage() {
       attempted = true;
       setPrintAttempted(true);
       try {
-        window.focus();
-        window.print();
+        requestPrint();
       } catch {
         // Auto-print may be blocked (e.g. iframe). User can click the toolbar button.
       }
@@ -115,7 +119,7 @@ function ExportPrintPage() {
             ← Tillbaka
           </Link>
           <button
-            onClick={() => window.print()}
+            onClick={requestPrint}
             className="text-xs font-display uppercase tracking-[0.14em] px-5 py-2.5 rounded bg-drake-sky text-drake-deep hover:bg-white font-semibold"
           >
             Skriv ut / Spara som PDF
