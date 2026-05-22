@@ -62,7 +62,7 @@ function SlidePage() {
           {slide.kind === "who" && <WhoSlide slide={slide} />}
           {slide.kind === "chain" && <ChainSlide slide={slide} />}
           {slide.kind === "partners" && <PartnersSlide slide={slide} />}
-          {slide.kind === "dialog" && <DialogSlide slide={slide} />}
+          {/* dialog slide removed — slide 4 leder direkt till /hub */}
         </motion.section>
       </AnimatePresence>
 
