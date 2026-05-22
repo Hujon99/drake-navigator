@@ -22,12 +22,15 @@ function HubPage() {
 
       <div className="max-w-7xl mx-auto px-6 md:px-10">
         <motion.div variants={stagger()} initial="initial" animate="animate" className="mb-12">
-          <motion.p variants={fadeUp} className="da-eyebrow">Områdeskarta</motion.p>
-          <motion.h1 variants={fadeUp} className="da-display mt-4 text-[clamp(36px,5vw,68px)] max-w-3xl">
-            Sex områden. <span className="text-drake-sky">Ett ekosystem.</span>
+          <motion.div variants={fadeUp} className="flex items-center gap-3">
+            <span className="h-px w-10 bg-drake-sky" />
+            <p className="da-eyebrow">Kundens fokus — Områdeskarta</p>
+          </motion.div>
+          <motion.h1 variants={fadeUp} className="da-display mt-4 text-[clamp(36px,5vw,68px)] max-w-3xl leading-[1.05]">
+            Var är ni idag? <span className="text-drake-sky">Vad är mest relevant för er?</span>
           </motion.h1>
           <motion.p variants={fadeUp} className="da-ingress mt-5 max-w-2xl">
-            Klicka på det område som är mest relevant för er just nu. Varje område går på djupet: problem, vad vi gör, exempel och nästa steg.
+            Sex områden, ett ekosystem. Välj det som ligger närmast er situation just nu — varje område går på djupet: problem, vad vi gör, exempel och nästa steg.
           </motion.p>
 
           <motion.div variants={fadeUp} className="mt-6 flex gap-3 text-xs font-display uppercase tracking-[0.14em]">
