@@ -91,10 +91,12 @@ function ExportPrintPage() {
   return (
     <div className="export-print-root">
       {/* On-screen toolbar (hidden in print) */}
-      <div className="no-print sticky top-0 z-50 bg-drake-deep text-white px-6 py-3 flex items-center justify-between">
+      <div className="no-print sticky top-0 z-50 bg-drake-deep text-white px-6 py-3 flex items-center justify-between shadow-lg">
         <div className="flex items-center gap-3 text-sm">
           <Logo variant="light" className="h-5" />
-          <span className="font-display uppercase tracking-[0.14em] text-xs">Rapport — granska och spara som PDF</span>
+          <span className="font-display uppercase tracking-[0.14em] text-xs hidden md:inline">
+            Rapport — granska och spara som PDF
+          </span>
         </div>
         <div className="flex items-center gap-3">
           <Link to="/export" className="text-xs font-display uppercase tracking-[0.14em] px-3 py-2 rounded hover:bg-white/10">
@@ -102,12 +104,20 @@ function ExportPrintPage() {
           </Link>
           <button
             onClick={() => window.print()}
-            className="text-xs font-display uppercase tracking-[0.14em] px-4 py-2 rounded bg-drake-sky text-drake-deep hover:bg-white"
+            className="text-xs font-display uppercase tracking-[0.14em] px-5 py-2.5 rounded bg-drake-sky text-drake-deep hover:bg-white font-semibold"
           >
-            Skriv ut / Spara PDF
+            Skriv ut / Spara som PDF
           </button>
         </div>
       </div>
+
+      {/* Info banner — visible until user prints */}
+      {!printed && (
+        <div className="no-print bg-drake-tint-soft border-b border-drake-line px-6 py-4 text-center text-sm text-drake-deep">
+          Utskriftsdialogen startas automatiskt. Om inget händer — klicka{" "}
+          <strong>"Skriv ut / Spara som PDF"</strong> uppe till höger. Välj <em>"Spara som PDF"</em> som destination.
+        </div>
+      )}
 
       <div className="export-print-pages">
         <CoverPage customer={state.customer} dateLabel={dateLabel} entries={tocEntries} />
