@@ -395,7 +395,7 @@ export function ChainSlide({ slide }: { slide: typeof coreSlides[number] }) {
 }
 
 /* ───────────────── Slide 4: Partners ───────────────── */
-function PartnersSlide({ slide }: { slide: typeof coreSlides[number] }) {
+export function PartnersSlide({ slide }: { slide: typeof coreSlides[number] }) {
   return (
     <div className="w-full min-h-screen flex flex-col justify-center px-8 md:px-16 py-28 bg-white">
       <motion.div variants={stagger(0.04)} initial="initial" animate="animate" className="max-w-7xl mx-auto w-full">
