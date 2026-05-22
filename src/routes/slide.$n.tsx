@@ -126,7 +126,7 @@ function SlidePage() {
 }
 
 /* ───────────────── Slide 1: Cover ───────────────── */
-function CoverSlide({ slide }: { slide: typeof coreSlides[number] }) {
+export function CoverSlide({ slide }: { slide: typeof coreSlides[number] }) {
   return (
     <div
       className="relative w-full min-h-screen flex items-center overflow-hidden da-grain da-vignette"
@@ -241,7 +241,7 @@ function CoverSlide({ slide }: { slide: typeof coreSlides[number] }) {
 }
 
 /* ───────────────── Slide 2: Who we are ───────────────── */
-function WhoSlide({ slide }: { slide: typeof coreSlides[number] }) {
+export function WhoSlide({ slide }: { slide: typeof coreSlides[number] }) {
   const stats = [
     { n: "2014", l: "Grundat" },
     { n: "~50", l: "Specialister" },
@@ -315,7 +315,7 @@ function WhoSlide({ slide }: { slide: typeof coreSlides[number] }) {
 
 
 /* ───────────────── Slide 3: Value chain ───────────────── */
-function ChainSlide({ slide }: { slide: typeof coreSlides[number] }) {
+export function ChainSlide({ slide }: { slide: typeof coreSlides[number] }) {
   const steps = [
     { label: "Datakällor", sub: "ERP · CRM · WMS · SaaS · IoT", icon: Database },
     { label: "Plattform", sub: "Lakehouse · ELT · Governance", icon: Layers },
@@ -395,7 +395,7 @@ function ChainSlide({ slide }: { slide: typeof coreSlides[number] }) {
 }
 
 /* ───────────────── Slide 4: Partners ───────────────── */
-function PartnersSlide({ slide }: { slide: typeof coreSlides[number] }) {
+export function PartnersSlide({ slide }: { slide: typeof coreSlides[number] }) {
   return (
     <div className="w-full min-h-screen flex flex-col justify-center px-8 md:px-16 py-28 bg-white">
       <motion.div variants={stagger(0.04)} initial="initial" animate="animate" className="max-w-7xl mx-auto w-full">
@@ -436,7 +436,7 @@ function PartnersSlide({ slide }: { slide: typeof coreSlides[number] }) {
 }
 
 /* ───────────────── Slide 5: Dialog ───────────────── */
-function DialogSlide({ slide }: { slide: typeof coreSlides[number] }) {
+export function DialogSlide({ slide }: { slide: typeof coreSlides[number] }) {
   return (
     <div
       className="relative w-full min-h-screen flex items-center justify-center text-white overflow-hidden da-grain"
