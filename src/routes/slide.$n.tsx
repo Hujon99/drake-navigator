@@ -1,7 +1,8 @@
 import { createFileRoute, Link, useNavigate, notFound } from "@tanstack/react-router";
 import { AnimatePresence, motion } from "motion/react";
 import { useEffect } from "react";
-import { ArrowLeft, ArrowRight, Database, Layers, ShieldCheck, Sparkles } from "lucide-react";
+import { ArrowLeft, ArrowRight, Database, Layers, ShieldCheck, Sparkles, Plus, CheckCircle2 } from "lucide-react";
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription, DialogTrigger } from "@/components/ui/dialog";
 import { coreSlides } from "@/content/core-slides";
 import { modules } from "@/content/modules";
 import { NavBar } from "@/components/drake/NavBar";
