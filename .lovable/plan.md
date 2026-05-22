@@ -5,6 +5,7 @@ En webbaserad "choose your own adventure"-presentation som ersätter PowerPoint 
 ## Designprinciper
 
 Hämtas direkt från det uppladdade designsystemet:
+
 - **Färg**: Drake Sky `#50BCBD` primär, `#168896` accent, `#5E5E5E` closing-yta, vit bakgrund. Inga gradienter som dominerar, ingen palett utanför teal-skalan.
 - **Typografi**: Share Bold UPPERCASE för rubriker, Roboto för brödtext. Max 3 vikter / 4 storlekar per layout.
 - **Logo**: alltid nere till höger utom på cover (Drake Cloud-bakgrund + logo).
@@ -30,6 +31,7 @@ Hämtas direkt från det uppladdade designsystemet:
 ```
 
 **6 moduler**, varje med struktur *Problem → Vad vi gör → Exempel/utfall → Nästa steg*:
+
 1. Dataplattform
 2. Process Intelligence (AI/agentic-vinkel framhävd)
 3. Applications / Automation / Agentic AI
@@ -61,9 +63,12 @@ Hämtas direkt från det uppladdade designsystemet:
 ## Innehåll (placeholder-kvalitet)
 
 Skrivs på svenska i konsultativ ton baserat på PPTX:en. Exempel-snippet för Dataplattform:
+
 > "De flesta organisationer sitter på mer data än de kan använda. Vi bygger plattformen som faktiskt används — skalbar på Snowflake, Fabric eller Databricks, med governance och lineage från dag ett."
 
-Partnerskapsslidens logos: Microsoft, Google, Qlik, Snowflake, Databricks, mpmX, Planacy, Aimplan, UiPath, DataRobot, Tableau, dbt (textbaserade chips i Drake-stil tills riktiga logos skaffas — markeras tydligt som placeholder).
+Partnerskapsslidens logos: Microsoft, Google, Qlik, Snowflake, Databricks, mpmX, Planacy, Aimplan, UiPath, DataRobot, Tableau, dbt (textbaserade chips i Drake-stil tills riktiga logos skaffas — markeras tydligt som placeholder). Här kan du eventuellt hämta loggorna att använda själv från internet  
+  
+Var inte rädd för premium parallax och scrolleffekter etc. Det är ett säljstöd men måste inte vara helt 100 kopplat till slide-deck format, utan vi kan utnyttja fördelarna som react/html ger samtidigt som slidekänsla kan bli backbone och den röda tråden så att det fortfarande fungerar bra som ett säljstöd
 
 ## Leverabler
 
@@ -77,7 +82,6 @@ Partnerskapsslidens logos: Microsoft, Google, Qlik, Snowflake, Databricks, mpmX,
 - Delningsläge / unika kund-URLer / länktracking (Fas 4 — v2).
 - Backend, inloggning, databas.
 - Riktiga partner-logo-bilder (chips/placeholder tills filer levereras).
-- Tunga scroll-/parallax-effekter — premium men restrained.
 
 ## Tekniska detaljer
 
