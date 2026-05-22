@@ -241,7 +241,7 @@ export function CoverSlide({ slide }: { slide: typeof coreSlides[number] }) {
 }
 
 /* ───────────────── Slide 2: Who we are ───────────────── */
-function WhoSlide({ slide }: { slide: typeof coreSlides[number] }) {
+export function WhoSlide({ slide }: { slide: typeof coreSlides[number] }) {
   const stats = [
     { n: "2014", l: "Grundat" },
     { n: "~50", l: "Specialister" },
