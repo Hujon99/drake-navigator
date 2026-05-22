@@ -7,28 +7,28 @@ export const modules: ModuleContent[] = [
     title: "Dataplattform",
     tagline: "Grunden som faktiskt används.",
     problem:
-      "De flesta organisationer sitter på mer data än de kan använda. Plattformar byggs men adopteras inte, kostnaderna skenar och affären får aldrig en enhetlig sanning att luta sig mot.",
+      "De flesta sitter på mer data än de använder. Plattformar byggs men adopteras inte, kostnaderna skenar och affären får aldrig en enhetlig sanning att luta sig mot.",
     solution: [
       {
-        heading: "Modern lakehouse-arkitektur",
-        body: "Vi designar och bygger plattformar på Snowflake, Microsoft Fabric, Databricks eller Google Cloud — anpassat efter er stack, era SLA:er och er kostnadsprofil.",
+        heading: "Modern lakehouse",
+        body: "Vi designar och bygger på Snowflake, Microsoft Fabric, Databricks eller Google Cloud — anpassat efter er stack, era SLA:er och er kostnadsprofil.",
       },
       {
-        heading: "Integration som inte spricker",
-        body: "ELT/ETL/CDC från ERP, CRM, WMS, SaaS och on-prem-källor. Batch och streaming där det behövs. dbt och Azure Data Factory som motorer.",
+        heading: "Integration som håller",
+        body: "ELT, ETL och CDC från ERP, CRM, WMS, SaaS och on-prem. Batch och streaming där det behövs. dbt och Azure Data Factory som motorer.",
       },
       {
         heading: "Governance från dag ett",
-        body: "Data catalog, lineage, kvalitet och behörigheter inbyggt — inte ett efterhandsprojekt. Trusted data-lagret är där analys, AI och planering hämtar samma siffror.",
+        body: "Catalog, lineage, kvalitet och behörigheter inbyggt — inte ett efterhandsprojekt. Trusted data är där analys, AI och planering hämtar samma siffror.",
       },
     ],
     outcome: [
       { metric: "70%", label: "kortare time-to-data", body: "Från månader till veckor för nya datakällor i produktion." },
       { metric: "1", label: "version av sanningen", body: "Samma KPI:er i finans, sälj och operations." },
-      { metric: "40%", label: "lägre infrakostnad", body: "Genom rätt nivå av compute och elimination av dubblerade pipelines." },
+      { metric: "40%", label: "lägre infrakostnad", body: "Genom rätt nivå av compute och avveckling av dubblerade pipelines." },
     ],
     nextStep:
-      "En 2-veckors plattformsbedömning: vi kartlägger nuläget, identifierar tre quick wins och föreslår målarkitektur med kostnadsestimat.",
+      "Plattformsbedömning på 2 veckor: vi kartlägger nuläget, identifierar tre quick wins och föreslår målarkitektur med kostnadsestimat.",
     partners: ["Snowflake", "Microsoft Fabric", "Databricks", "Google Cloud", "dbt", "Qlik Talend"],
     caseSlug: "bi-retail",
   },
@@ -36,30 +36,30 @@ export const modules: ModuleContent[] = [
     slug: "process-intelligence",
     number: "02",
     title: "Process Intelligence",
-    tagline: "Era processer, som de faktiskt går.",
+    tagline: "Processen, som den faktiskt går — inte som den beskrivs.",
     problem:
-      "Era processflödesdiagram beskriver hur det borde fungera. Verkligheten ser annorlunda ut — och det är där tiden, pengarna och kundupplevelsen försvinner. Vi gör det osynliga mätbart.",
+      "Era processdiagram beskriver hur det borde fungera. Verkligheten ser annorlunda ut — och det är där tiden, pengarna och kundupplevelsen försvinner. Vi gör det osynliga mätbart.",
     solution: [
       {
         heading: "Process mining på riktig data",
-        body: "mpmX visualiserar verkliga processflöden baserat på tidstämplar från era system. Avvikelser, slingor och flaskhalsar blir synliga — inte gissade.",
+        body: "mpmX visualiserar verkliga flöden från era tidstämplar. Avvikelser, loopar och flaskhalsar blir synliga — inte gissade.",
       },
       {
-        heading: "AI-agentic process intelligence",
-        body: "Nästa steg är inte fler dashboards. Vi bygger agenter som analyserar processavvikelser, föreslår åtgärder och triggar workflows när KPI:er glider.",
+        heading: "Agentic process intelligence",
+        body: "Nästa steg är inte fler dashboards. Vi bygger agenter som analyserar avvikelser, föreslår åtgärder och triggar workflows när KPI:er glider.",
       },
       {
         heading: "Från insikt till åtgärd",
-        body: "Order-to-Cash, Purchase-to-Pay, Customer Service, IT Service Management. Vi kopplar mining-resultaten direkt till automation och förbättringsbacklogg.",
+        body: "Order-to-Cash, Purchase-to-Pay, Customer Service, ITSM. Vi kopplar mining-resultaten direkt till automation och förbättringsbacklogg.",
       },
     ],
     outcome: [
-      { metric: "−18%", label: "DSO", body: "Genom att identifiera och åtgärda root-cause i fakturaflödet." },
-      { metric: "3x", label: "snabbare rotorsaksanalys", body: "Agenter sammanfattar avvikelser istället för manuell drilldown." },
-      { metric: "100%", label: "datadriven", body: "Inga workshops byggda på magkänsla — bara verkliga tidstämplar." },
+      { metric: "−18%", label: "lägre DSO", body: "Genom root-cause-åtgärder i fakturaflödet." },
+      { metric: "3×", label: "snabbare rotorsaksanalys", body: "Agenter sammanfattar avvikelser istället för manuell drilldown." },
+      { metric: "100%", label: "datadrivet underlag", body: "Inga workshops byggda på magkänsla — bara verkliga tidstämplar." },
     ],
     nextStep:
-      "Välj en process. Vi extraherar event-log, levererar en första mpmX-analys på 3 veckor och visar var pengarna ligger.",
+      "Pilot på 3 veckor: välj en process, vi extraherar event-log och levererar en första mpmX-analys som visar var pengarna ligger.",
     partners: ["mpmX", "Microsoft Power Platform", "Azure AI Foundry"],
     caseSlug: "mpmx-quote-to-cash",
   },
@@ -73,7 +73,7 @@ export const modules: ModuleContent[] = [
     solution: [
       {
         heading: "Agentic AI i produktion",
-        body: "Inte demos. Riktiga agenter byggda på Azure AI Foundry, Azure OpenAI och Copilot Studio som hanterar kundinteraktion, kategorisering och back-end-integration mot ERP.",
+        body: "Inte demos. Riktiga agenter på Azure AI Foundry, Azure OpenAI och Copilot Studio som hanterar kundinteraktion, kategorisering och ERP-integration.",
       },
       {
         heading: "Low code där det passar",
@@ -81,16 +81,16 @@ export const modules: ModuleContent[] = [
       },
       {
         heading: "Custom där det krävs",
-        body: "Pro-code applikationer när standard inte räcker — med samma data, samma governance och samma plattform i botten.",
+        body: "Pro-code-applikationer när standard inte räcker — med samma data, samma governance och samma plattform i botten.",
       },
     ],
     outcome: [
-      { metric: "6x", label: "ökad konvertering", body: "Partner Inkasso: AI-agent ersatte kundtjänst med full ERP-integration." },
-      { metric: "−80%", label: "manuell handpåläggning", body: "I kategoriseringsflöden vi automatiserat med NLP." },
+      { metric: "6×", label: "ökad konvertering", body: "Partner Inkasso: AI-agent ersatte kundtjänst med full ERP-integration." },
+      { metric: "−80%", label: "mindre manuell handpåläggning", body: "I kategoriseringsflöden vi automatiserat med NLP." },
       { metric: "Veckor", label: "till första release", body: "Inte kvartal. Vi paketerar i sprintar med tydlig affärsnytta." },
     ],
     nextStep:
-      "En agentic-workshop: vi identifierar tre processer där en AI-agent skulle göra mätbar skillnad och paketerar en pilot på 6–8 veckor.",
+      "Agentic-workshop på en dag: vi identifierar tre processer där en AI-agent gör mätbar skillnad och paketerar en pilot på 6–8 veckor.",
     partners: ["Azure AI Foundry", "Azure OpenAI", "Copilot Studio", "Power Platform", "UiPath"],
     caseSlug: "partner-inkasso",
   },
@@ -104,24 +104,24 @@ export const modules: ModuleContent[] = [
     solution: [
       {
         heading: "Power BI och Qlik på riktigt",
-        body: "Vi bygger semantiska modeller som håller över tid — inte rapport-spaghetti. Återanvändbara, governade, prestanda-tunade.",
+        body: "Semantiska modeller som håller över tid — inte rapport-spaghetti. Återanvändbara, governade, prestanda-tunade.",
       },
       {
-        heading: "Embedded analytics & ML i BI",
-        body: "Python och R direkt i Qlik Sense. Qlik Predict och DataRobot för AutoML. Statistiska modeller som hjälper er svara på 'varför' — inte bara 'vad'.",
+        heading: "Embedded ML i BI",
+        body: "Python och R direkt i Qlik Sense. Qlik Predict och DataRobot för AutoML. Statistiska modeller som svarar på 'varför' — inte bara 'vad'.",
       },
       {
         heading: "Adoption som mål",
-        body: "Vi mäter inte success i antal dashboards. Vi mäter i hur många beslut som fattas på dem.",
+        body: "Vi mäter inte success i antal dashboards. Vi mäter i antal beslut som fattas på dem.",
       },
     ],
     outcome: [
-      { metric: "AbbVie", label: "Healthcare ML i Qlik", body: "Avancerade statistiska modeller i R kopplade direkt mot BI-lagret." },
+      { metric: "90%", label: "veckovis aktiva användare", body: "Bland målgruppen, mätt 6 månader efter go-live." },
       { metric: "<2s", label: "rapportresponstid", body: "På datamängder över 500M rader genom rätt modellering." },
-      { metric: "90%", label: "användning per vecka", body: "Bland målgruppen, mätt 6 månader efter go-live." },
+      { metric: "5+", label: "statistiska modeller live", body: "AbbVie: avancerad healthcare-statistik i R direkt i BI-lagret." },
     ],
     nextStep:
-      "En BI-hälsokoll: vi går igenom er nuvarande lösning, identifierar tre adoptionsblockerare och föreslår konkreta åtgärder.",
+      "BI-hälsokoll på 2 veckor: vi går igenom er nuvarande lösning, identifierar tre adoptionsblockerare och föreslår konkreta åtgärder.",
     partners: ["Power BI", "Qlik", "Tableau", "DataRobot", "Qlik Predict"],
     caseSlug: "bi-retail",
   },
@@ -135,7 +135,7 @@ export const modules: ModuleContent[] = [
     solution: [
       {
         heading: "Modern planeringsplattform",
-        body: "Aimplan, Planacy och Dataplus — vi väljer det som passar er process, inte tvärtom. Budget, prognos, sales planning och driver-baserad modellering.",
+        body: "Aimplan, Planacy eller Dataplus — vi väljer det som passar er process, inte tvärtom. Budget, prognos, sales planning och driver-baserad modellering.",
       },
       {
         heading: "Writeback till källan",
@@ -143,16 +143,16 @@ export const modules: ModuleContent[] = [
       },
       {
         heading: "Scenarier som tas på allvar",
-        body: "Vad händer om priset går upp 4%? Volymen ner 6%? Vi bygger modellerna så att ledningsgruppen kan svara på det i mötet — inte två veckor efter.",
+        body: "Vad händer om priset går upp 4%? Volymen ner 6%? Ledningsgruppen får svaret i mötet — inte två veckor efter.",
       },
     ],
     outcome: [
-      { metric: "5d → 1d", label: "månadsavslut", body: "Genom att flytta planering ur Excel och in i ett kollaborativt verktyg." },
+      { metric: "5d → 1d", label: "snabbare månadsavslut", body: "Genom att flytta planering ur Excel och in i ett kollaborativt verktyg." },
       { metric: "10+", label: "scenarier parallellt", body: "Utan att tappa kontroll över vilken version som gäller." },
-      { metric: "1", label: "sanning", body: "Planering, faktiskt utfall och prognos i samma modell." },
+      { metric: "1", label: "modell, en sanning", body: "Planering, faktiskt utfall och prognos i samma modell." },
     ],
     nextStep:
-      "En planeringskartläggning: vi följer er senaste budgetcykel, identifierar friktionspunkterna och föreslår målbild med verktygsval.",
+      "Planeringskartläggning på 3 veckor: vi följer er senaste budgetcykel, identifierar friktionspunkterna och föreslår målbild med verktygsval.",
     partners: ["Aimplan", "Planacy", "Dataplus"],
     caseSlug: "planning-finance",
   },
@@ -162,11 +162,11 @@ export const modules: ModuleContent[] = [
     title: "Data Strategy",
     tagline: "Vägen från ambition till värde.",
     problem:
-      "Det är inte teknik som stoppar er — det är otydliga prioriteringar, otydligt ägarskap och en backlog som ingen vågar säga nej i. Strategin är där värdet beslutas, inte i verktygsvalet.",
+      "Det är inte tekniken som stoppar er — det är otydliga prioriteringar, otydligt ägarskap och en backlog som ingen vågar säga nej i. Strategin är där värdet beslutas, inte i verktygsvalet.",
     solution: [
       {
         heading: "Assessment som ger riktning",
-        body: "Vi kartlägger mognadsgraden över data, analys, AI och organisation. Inte i en 80-sidig rapport — i en handlingsplan ni kan börja exekvera på i nästa kvartal.",
+        body: "Vi kartlägger mognadsgraden över data, analys, AI och organisation. Inte i en 80-sidig rapport — i en handlingsplan ni kan börja exekvera på nästa kvartal.",
       },
       {
         heading: "Use case-portfölj med ROI",
@@ -178,12 +178,12 @@ export const modules: ModuleContent[] = [
       },
     ],
     outcome: [
-      { metric: "6v", label: "till strategi som exekveras", body: "Inte en hyllvärmare — en roadmap som faktiskt styr investeringarna." },
+      { metric: "6v", label: "till exekverbar strategi", body: "Inte en hyllvärmare — en roadmap som faktiskt styr investeringarna." },
       { metric: "3–5", label: "prioriterade use cases", body: "Med ROI, beroenden och leveransplan." },
-      { metric: "1", label: "språk", body: "Affär, IT och leverans pratar samma data-språk." },
+      { metric: "1", label: "gemensamt språk", body: "Affär, IT och leverans pratar samma data-språk." },
     ],
     nextStep:
-      "En 90-minuters intro där vi visar vårt ramverk och föreslår scope för en assessment i er kontext.",
+      "Intro på 90 minuter: vi visar vårt ramverk och föreslår scope för en assessment i er kontext.",
     partners: ["Independent advisory", "QPEP utbildningsprogram"],
     caseSlug: "data-strategy-public",
   },
