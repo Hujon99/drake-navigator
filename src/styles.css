@@ -263,6 +263,38 @@ html { -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; 
   .lenis-prevent, html.lenis, html.lenis body { overflow: visible !important; height: auto !important; }
 }
 
+.pdf-capture-mode,
+.pdf-capture-mode body {
+  width: 1600px !important;
+  background: #ffffff !important;
+  -webkit-print-color-adjust: exact !important;
+  print-color-adjust: exact !important;
+}
+.pdf-capture-mode .no-print,
+.pdf-capture-mode [data-no-print] {
+  display: none !important;
+}
+.pdf-capture-mode .print-page {
+  width: 1600px !important;
+  height: 1131px !important;
+  min-height: 1131px !important;
+  max-height: 1131px !important;
+  overflow: hidden !important;
+  page-break-after: auto !important;
+  break-after: auto !important;
+  -webkit-print-color-adjust: exact !important;
+  print-color-adjust: exact !important;
+}
+.pdf-capture-mode .print-page > * {
+  width: 1600px !important;
+  height: 1131px !important;
+  min-height: 1131px !important;
+}
+.pdf-capture-mode .print-page * {
+  -webkit-print-color-adjust: exact !important;
+  print-color-adjust: exact !important;
+}
+
 /* ─── Export module: portrait A4 print pages ─── */
 .export-print-root { background: #f3f3f3; min-height: 100vh; }
 .export-print-pages { max-width: 900px; margin: 0 auto; padding: 32px 0 64px; display: flex; flex-direction: column; gap: 24px; }
