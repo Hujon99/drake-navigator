@@ -9,7 +9,7 @@ import { Logo } from "@/components/drake/Logo";
 
 const searchSchema = z.object({ s: z.string().optional() });
 
-export const Route = createFileRoute("/export/print")({
+export const Route = createFileRoute("/export-print")({
   validateSearch: searchSchema,
   head: () => ({ meta: [{ title: "Rapport — Drake Analytics" }] }),
   component: ExportPrintPage,
