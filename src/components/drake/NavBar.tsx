@@ -1,5 +1,5 @@
 import { Link, useLocation, useRouter } from "@tanstack/react-router";
-import { ArrowLeft, LayoutGrid, Printer } from "lucide-react";
+import { ArrowLeft, LayoutGrid, FileDown } from "lucide-react";
 import { Logo } from "./Logo";
 
 interface Crumb {
@@ -72,12 +72,12 @@ export function NavBar({
         >
           <LayoutGrid size={14} /> Hub
         </Link>
-        <button
-          onClick={() => window.print()}
+        <Link
+          to="/export"
           className="inline-flex items-center gap-2 text-xs uppercase tracking-[0.14em] font-display px-3 py-2 rounded-md hover:bg-drake-tint-soft hover:text-drake-deep transition-colors"
         >
-          <Printer size={14} /> PDF
-        </button>
+          <FileDown size={14} /> Skapa PDF
+        </Link>
         <Logo variant={onLight ? "dark" : "light"} className="h-6" />
       </div>
     </header>
