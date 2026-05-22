@@ -14,8 +14,7 @@ import {
   PartnersSlide,
   DialogSlide,
 } from "@/components/drake/CoreSlides";
-import { ModuleBody } from "@/components/drake/ModuleBody";
-import { CaseBody } from "@/components/drake/CaseBody";
+import { ModuleSlide, CaseSlide } from "@/components/drake/ReportSlides";
 
 
 const searchSchema = z.object({ s: z.string().optional() });
