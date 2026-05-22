@@ -14,7 +14,7 @@ import { slideVariants, fadeUp, stagger } from "@/lib/motion";
 
 import cloud1 from "@/assets/drake/cloud-1.png";
 
-import nordics from "@/assets/drake/nordics-map.png";
+
 import dataHuman from "@/assets/drake/data-human.png";
 
 export const Route = createFileRoute("/slide/$n")({
