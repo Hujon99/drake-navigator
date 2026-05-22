@@ -1,4 +1,4 @@
-import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
 import { useState } from "react";
 import { ArrowLeft, ArrowRight, Check, FileDown } from "lucide-react";
 import { coreSlides } from "@/content/core-slides";
@@ -16,7 +16,6 @@ export const Route = createFileRoute("/export")({
 type Step = 1 | 2 | 3;
 
 function ExportPage() {
-  const navigate = useNavigate();
   const [state, setState] = useState<ExportState>(defaultExportState);
   const [step, setStep] = useState<Step>(1);
 
@@ -51,8 +50,14 @@ function ExportPage() {
   }
   function handleCreate() {
     const encoded = encodeExportState(state);
-    // Open print view in same tab
-    navigate({ to: "/export/print", search: { s: encoded } });
+    const url = `/export/print?s=${encodeURIComponent(encoded)}`;
+    // Open in a new tab — avoids iframe print restrictions in preview and gives
+    // the user a clean window for the browser's "Save as PDF" dialog.
+    const win = window.open(url, "_blank", "noopener");
+    if (!win) {
+      // Popup blocked — fall back to same-tab navigation
+      window.location.href = url;
+    }
   }
 
   return (
