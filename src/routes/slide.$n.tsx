@@ -126,7 +126,7 @@ function SlidePage() {
 }
 
 /* ───────────────── Slide 1: Cover ───────────────── */
-function CoverSlide({ slide }: { slide: typeof coreSlides[number] }) {
+export function CoverSlide({ slide }: { slide: typeof coreSlides[number] }) {
   return (
     <div
       className="relative w-full min-h-screen flex items-center overflow-hidden da-grain da-vignette"
