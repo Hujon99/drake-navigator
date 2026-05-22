@@ -50,14 +50,9 @@ function ExportPage() {
   }
   function handleCreate() {
     const encoded = encodeExportState(state);
-    const url = `/rapport?s=${encodeURIComponent(encoded)}`;
-    // Open in a new tab so the report page is the only thing rendered there.
-    const win = window.open(url, "_blank", "noopener");
-    if (!win) {
-      // Popup blocked — fall back to same-tab navigation
-      window.location.href = url;
-    }
+    window.location.href = `/rapport?s=${encodeURIComponent(encoded)}`;
   }
+
 
   return (
     <div className="min-h-screen bg-drake-wash pb-32">
@@ -415,8 +410,10 @@ function Step3({
 
       <div className="mt-6 rounded-xl bg-drake-deep/5 border border-drake-deep/15 p-4 text-sm text-drake-mid">
         När ni klickar <strong className="text-drake-deep">Skapa PDF</strong> öppnas en print-anpassad
-        version och webbläsarens utskriftsdialog startar. Välj <em>"Spara som PDF"</em> som destination.
+        version av rapporten. Klicka <em>"Skriv ut / Spara som PDF"</em> uppe till höger och välj
+        <em>"Spara som PDF"</em> som destination.
       </div>
+
     </div>
   );
 }
