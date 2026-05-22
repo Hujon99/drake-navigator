@@ -4,7 +4,7 @@ import { useEffect } from "react";
 import { ArrowLeft, ArrowRight } from "lucide-react";
 import { coreSlides } from "@/content/core-slides";
 import { NavBar } from "@/components/drake/NavBar";
-import { CoverSlide, WhoSlide, ChainSlide, PartnersSlide, DialogSlide } from "@/components/drake/CoreSlides";
+import { CoverSlide, WhoSlide, ChainSlide, PartnersSlide } from "@/components/drake/CoreSlides";
 import { slideVariants } from "@/lib/motion";
 
 
