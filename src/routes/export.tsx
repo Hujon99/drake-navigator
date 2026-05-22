@@ -50,9 +50,8 @@ function ExportPage() {
   }
   function handleCreate() {
     const encoded = encodeExportState(state);
-    const url = `/export/print?s=${encodeURIComponent(encoded)}`;
-    // Open in a new tab — avoids iframe print restrictions in preview and gives
-    // the user a clean window for the browser's "Save as PDF" dialog.
+    const url = `/export-print?s=${encodeURIComponent(encoded)}`;
+    // Open in a new tab so the report page is the only thing rendered there.
     const win = window.open(url, "_blank", "noopener");
     if (!win) {
       // Popup blocked — fall back to same-tab navigation

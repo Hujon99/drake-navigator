@@ -1,85 +1,80 @@
+## Problem to solve
 
-## Mål
+The current URL changes to `/export/print`, but the screen still shows the export wizard. That means the print route is matched as a child of `/export`, but the `/export` route component does not render an `<Outlet />`. So the actual print component never mounts, and `window.print()` never runs.
 
-Ge säljaren ett snabbt sätt att bygga en skräddarsydd PDF-rapport från befintligt innehåll:
-1. Välj vilka av de 5 **grunddelarna** (kärnsekvensen) som ska med.
-2. Välj vilka av de **6 modulerna** som ska med — och för varje vald modul om dess **kundcase** också ska ingå.
-3. Klicka *Skapa PDF* → en print-optimerad sida öppnas och webbläsarens "Spara som PDF" triggas.
+There is also a second reliability issue: browsers often block automatic `window.print()` when it happens after a new tab load instead of directly inside the original button click.
 
-## UX-flöde
+## Plan
+
+### 1. Fix the route architecture first
+
+Make the print renderer a standalone route instead of a nested child of `/export`.
+
+- Move the print route from `/export/print` to a non-nested path such as `/export-print`.
+- Update the create route path in `src/routes/export.print.tsx`.
+- Update the export wizard button in `src/routes/export.tsx` to open `/export-print?s=...`.
+
+Why this is the safest fix:
 
 ```text
-[Hub] ──"Skapa PDF"──▶ /export (wizard)
-                          │
-        ┌─────────────────┼─────────────────┐
-        ▼                 ▼                 ▼
-   Steg 1: Grund     Steg 2: Moduler    Steg 3: Granska
-   (5 checkboxar)    (6 kort med två    + omslagsinfo
-                      checkboxar var:    (kundnamn, datum)
-                      modul / case)      ─▶ "Skapa PDF"
-                                            │
-                                            ▼
-                                    /export/print?state=…
-                                    (auto window.print)
+Current:
+/export         -> renders wizard
+/export/print   -> child route, but parent has no Outlet, so wizard remains visible
+
+Target:
+/export         -> renders wizard
+/export-print   -> renders only the print/PDF page
 ```
 
-- **Steg 1** – lista de 5 grundslides från `coreSlides` med titel + kort beskrivning. "Markera alla / inga".
-- **Steg 2** – grid med de 6 modulerna från `modules.ts`. Varje kort: modulnamn, tagline, två toggles ("Inkludera modul", "Inkludera kundcase"). Case-toggle disabled när modulen inte är vald.
-- **Steg 3** – sammanfattning + två valfria fält: **Kundnamn** och **Datum** (default idag), används på omslaget. Knapp *Skapa PDF*.
+This avoids a larger route refactor and ensures the print page is the only thing rendered in the new tab.
 
-## Print-rendering
+### 2. Change the final action from “open a tab and hope it prints” to a deliberate print page
 
-En egen route `/export/print` läser urvalet från URL (base64-encoded JSON) och renderar allt vertikalt staplat i ett print-optimerat layout. När sidan mountat och fonter laddat → `window.print()`. Användaren väljer "Spara som PDF" i sitt OS.
+Keep the new tab, but make it clearly a print/PDF page:
 
-Fördelar med detta framför jsPDF/pdf-lib:
-- Återanvänder vår befintliga styling — slides ser identiska ut.
-- Ingen extra dependency, ingen serverless rendering att underhålla.
-- Användaren får riktig vektoriserad text + selectable text i PDF.
+- Show the generated report immediately.
+- Show a sticky top toolbar with one primary button: `Skriv ut / Spara som PDF`.
+- Keep auto-print as a bonus, but do not rely on it.
+- Make the manual print button the dependable path because it is a direct user action and browsers allow it.
 
-### Sidstruktur i print-vyn
+This means the export flow still works even when Chrome blocks automatic print.
 
-1. **Omslag** (alltid) – Drake-logo, "Rapport för {kundnamn}", datum, lista av vad rapporten innehåller.
-2. **Innehållsförteckning** (alltid) – numrerad lista.
-3. **Grunddelar** – en print-anpassad version per vald `coreSlide` (kind: cover/who/chain/partners/dialog).
-4. **Moduler** – per vald modul: problem, vad-vi-gör, utfall, partners, nästa steg.
-5. **Kundcase** – per vald case: klient, utmaning, approach, resultat, tech.
+### 3. Improve auto-print without depending on it
 
-Varje "slide" är en `<section class="print-page">` med `break-after: page` så det blir exakt en A4-sida per block.
+On the standalone print route:
 
-## Filer som skapas
+- Wait until fonts are loaded.
+- Wait until the document is fully loaded.
+- Focus the window.
+- Try `window.print()` once.
+- If Chrome blocks it, leave the user on the report with the visible manual button.
 
-- `src/routes/export.tsx` – wizard (3 steg, lokal state, ingen backend).
-- `src/routes/export.print.tsx` – print-vy, auto-`window.print()` efter mount.
-- `src/components/export/StepCoreSelector.tsx`
-- `src/components/export/StepModuleSelector.tsx`
-- `src/components/export/StepReview.tsx`
-- `src/components/export/print/CorePrintSlide.tsx` – switch på `kind` → 5 print-varianter.
-- `src/components/export/print/ModulePrintSlide.tsx`
-- `src/components/export/print/CasePrintSlide.tsx`
-- `src/components/export/print/CoverPrintSlide.tsx`
-- `src/lib/export-state.ts` – typer + base64 encode/decode av urvalsstate.
+The copy should be honest:
 
-## Filer som ändras
+```text
+Rapporten är klar. Klicka “Skriv ut / Spara som PDF” och välj “Spara som PDF” i dialogen.
+```
 
-- `src/routes/hub.tsx` – lägg till "Skapa PDF"-knapp i headern bredvid HUB/PDF.
-- `src/styles.css` – ny `@media print` block: A4 page-size, dölj nav/chrome, force-color-adjust, sidbrytningar, kompakta typsnitt för print.
+Instead of implying automatic print is guaranteed.
 
-## Tekniska detaljer
+### 4. Clean up generated route handling
 
-- **State-transport**: `btoa(JSON.stringify({ core: number[], modules: { slug, includeCase }[], customer, date }))` i query-param. Print-routen avkodar i loader/component.
-- **Print-CSS**: `@page { size: A4; margin: 16mm 14mm }`. Class `.print-page { break-after: page; -webkit-print-color-adjust: exact; print-color-adjust: exact }`. Wrappa allt utanför print-content i `@media print { display: none }`.
-- **Auto-print**: `useEffect` med `document.fonts.ready.then(() => window.print())`. Lägg `afterprint` listener som visar en "Klar — stäng fliken"-overlay.
-- **Inga nya npm-paket** behövs.
+- Do not manually edit `src/routeTree.gen.ts`; let TanStack regenerate it.
+- Remove reliance on `/export/print` as a nested route.
+- Verify route links use the new route path consistently.
 
-## Edge cases
+### 5. Validate the actual user flow
 
-- Inget valt i något steg → *Nästa*/*Skapa PDF* disabled med tooltip.
-- Print-route utan state → visa felmeddelande med länk tillbaka till `/export`.
-- Långa textblock i moduler/cases → CSS `orphans: 3; widows: 3` så stycken inte splittras illa.
+After implementation, test this flow:
 
-## Out of scope (för denna iteration)
+1. Go to `/export`.
+2. Select at least one grunddel/modul.
+3. Fill optional customer/date.
+4. Click `Skapa PDF`.
+5. Confirm the new tab shows the report pages, not the wizard.
+6. Confirm the manual `Skriv ut / Spara som PDF` button opens the browser print dialog.
+7. Confirm print CSS hides toolbar/banners and outputs portrait A4 pages.
 
-- Server-renderad PDF (kan läggas till senare via puppeteer i en server-route om browser-print inte räcker).
-- Anpassa enskilda textstycken före export.
-- Spara/återanvända exportkonfigurationer.
-- Branding/färganpassning per kund.
+## Expected result
+
+Clicking `Skapa PDF` opens a dedicated report/PDF page, not the wizard. From there, the user can reliably open the browser print dialog and save the report as PDF. Auto-print can still attempt to run, but the flow no longer depends on browser behavior that Chrome may block.
