@@ -1,22 +1,12 @@
 import { createFileRoute, Link, useNavigate, notFound } from "@tanstack/react-router";
 import { AnimatePresence, motion } from "motion/react";
 import { useEffect } from "react";
-import { ArrowLeft, ArrowRight, Database, Layers, ShieldCheck, Sparkles, Plus, CheckCircle2 } from "lucide-react";
-import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription, DialogTrigger } from "@/components/ui/dialog";
+import { ArrowLeft, ArrowRight } from "lucide-react";
 import { coreSlides } from "@/content/core-slides";
-import { modules } from "@/content/modules";
 import { NavBar } from "@/components/drake/NavBar";
-import { SlideFooterLogo } from "@/components/drake/SlideFooterLogo";
-import { Logo } from "@/components/drake/Logo";
-import { LogoStrip } from "@/components/drake/LogoStrip";
-import { PartnerGrid } from "@/components/drake/PartnerGrid";
-import { NordicsMap } from "@/components/drake/NordicsMap";
-import { slideVariants, fadeUp, stagger } from "@/lib/motion";
+import { CoverSlide, WhoSlide, ChainSlide, PartnersSlide, DialogSlide } from "@/components/drake/CoreSlides";
+import { slideVariants } from "@/lib/motion";
 
-import cloud1 from "@/assets/drake/cloud-1.png";
-
-
-import dataHuman from "@/assets/drake/data-human.png";
 
 export const Route = createFileRoute("/slide/$n")({
   component: SlidePage,
