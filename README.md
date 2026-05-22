@@ -4,7 +4,7 @@ Interaktivt säljstöd för Drake Analytics. En "choose your own adventure"-pres
 
 ## Struktur
 
-- **Kärnsekvens** (`/slide/1` → `/slide/5`): linjär intro — From Insight to Action, Vilka vi är, Hela kedjan, Partnerskap, Kundens fokus.
+- **Kärnsekvens** (`/slide/1` → `/slide/4`): linjär intro — From Insight to Action, Vilka vi är, Hela kedjan, Partnerskap. Sista sliden leder direkt till områdeskartan.
 - **Områdeskarta / Hub** (`/hub`): central navigationsyta till de sex erbjudandemodulerna.
 - **Modulsidor** (`/modul/<slug>`): one-pagers med Problem → Vad vi gör → Exempel/utfall → Nästa steg.
 - **Kundcase** (`/case/<slug>`): resultatdrivna case kopplade till en eller flera moduler.
