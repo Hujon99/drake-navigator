@@ -115,5 +115,4 @@ function SlidePage() {
   );
 }
 
-export { CoverSlide, WhoSlide, ChainSlide, PartnersSlide, DialogSlide } from "@/components/drake/CoreSlides";
 
