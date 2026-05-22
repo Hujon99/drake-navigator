@@ -79,7 +79,7 @@ export function NordicsMap() {
     return () => {
       cancelled = true;
       const m = mapRef.current as
-        | (L.Map & { _drakeCleanup?: () => void })
+        | { remove: () => void; _drakeCleanup?: () => void }
         | null;
       m?._drakeCleanup?.();
       m?.remove();
