@@ -1,4 +1,4 @@
-import { CUSTOMERS, PARTNERS, getPartnerSvg, type BrandMeta } from "@/lib/logo-data";
+import { CUSTOMERS, PARTNERS, getPartnerSvg, getCustomerSvg, type BrandMeta } from "@/lib/logo-data";
 
 interface BrandLogoProps {
   /** Lookup key in CUSTOMERS or PARTNERS */
