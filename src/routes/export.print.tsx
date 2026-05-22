@@ -19,6 +19,7 @@ function ExportPrintPage() {
   const { s } = Route.useSearch();
   const state = useMemo<ExportState | null>(() => (s ? decodeExportState(s) : null), [s]);
   const [printed, setPrinted] = useState(false);
+  const [printAttempted, setPrintAttempted] = useState(false);
 
   useEffect(() => {
     document.body.classList.add("export-print-active");
@@ -28,23 +29,34 @@ function ExportPrintPage() {
   useEffect(() => {
     if (!state) return;
     let cancelled = false;
+    let attempted = false;
     const trigger = () => {
-      if (cancelled) return;
+      if (cancelled || attempted) return;
+      attempted = true;
+      setPrintAttempted(true);
       try {
+        window.focus();
         window.print();
-        setPrinted(true);
       } catch {
         // Auto-print may be blocked (e.g. iframe). User can click the toolbar button.
       }
     };
     const fontsReady = (document as Document & { fonts?: { ready: Promise<unknown> } }).fonts?.ready;
-    Promise.resolve(fontsReady).then(() => {
-      setTimeout(trigger, 500);
-    });
+    const queuePrint = () => window.setTimeout(trigger, 250);
+    window.setTimeout(trigger, 900);
+    if (document.readyState === "complete") queuePrint();
+    else window.addEventListener("load", queuePrint, { once: true });
+    Promise.resolve(fontsReady).then(queuePrint).catch(queuePrint);
+    const onVisible = () => {
+      if (document.visibilityState === "visible") queuePrint();
+    };
     const onAfter = () => setPrinted(true);
+    document.addEventListener("visibilitychange", onVisible);
     window.addEventListener("afterprint", onAfter);
     return () => {
       cancelled = true;
+      window.removeEventListener("load", queuePrint);
+      document.removeEventListener("visibilitychange", onVisible);
       window.removeEventListener("afterprint", onAfter);
     };
   }, [state]);
@@ -114,7 +126,7 @@ function ExportPrintPage() {
       {/* Info banner — visible until user prints */}
       {!printed && (
         <div className="no-print bg-drake-tint-soft border-b border-drake-line px-6 py-4 text-center text-sm text-drake-deep">
-          Utskriftsdialogen startas automatiskt. Om inget händer — klicka{" "}
+          {printAttempted ? "Om utskriftsdialogen inte öppnades — klicka " : "Utskriftsdialogen startas automatiskt. Om inget händer — klicka "}
           <strong>"Skriv ut / Spara som PDF"</strong> uppe till höger. Välj <em>"Spara som PDF"</em> som destination.
         </div>
       )}
