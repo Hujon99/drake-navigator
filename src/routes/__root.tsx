@@ -12,21 +12,17 @@ import appCss from "../styles.css?url";
 
 function NotFoundComponent() {
   return (
-    <div className="flex min-h-screen items-center justify-center bg-background px-4">
+    <div className="flex min-h-screen items-center justify-center bg-white px-6">
       <div className="max-w-md text-center">
-        <h1 className="text-7xl font-bold text-foreground">404</h1>
-        <h2 className="mt-4 text-xl font-semibold text-foreground">Page not found</h2>
-        <p className="mt-2 text-sm text-muted-foreground">
-          The page you're looking for doesn't exist or has been moved.
-        </p>
-        <div className="mt-6">
-          <Link
-            to="/"
-            className="inline-flex items-center justify-center rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground transition-colors hover:bg-primary/90"
-          >
-            Go home
-          </Link>
-        </div>
+        <p className="da-eyebrow mb-4">404</p>
+        <h1 className="da-display text-4xl mb-3">Sidan finns inte</h1>
+        <p className="text-drake-mid mb-6">Länken kan vara felaktig eller borttagen.</p>
+        <Link
+          to="/hub"
+          className="inline-flex items-center justify-center rounded-md bg-drake-sky px-5 py-3 text-sm font-display uppercase tracking-[0.14em] text-white hover:bg-drake-deep transition-colors"
+        >
+          Till översikt
+        </Link>
       </div>
     </div>
   );
@@ -35,32 +31,22 @@ function NotFoundComponent() {
 function ErrorComponent({ error, reset }: { error: Error; reset: () => void }) {
   console.error(error);
   const router = useRouter();
-
   return (
-    <div className="flex min-h-screen items-center justify-center bg-background px-4">
+    <div className="flex min-h-screen items-center justify-center bg-white px-6">
       <div className="max-w-md text-center">
-        <h1 className="text-xl font-semibold tracking-tight text-foreground">
-          This page didn't load
-        </h1>
-        <p className="mt-2 text-sm text-muted-foreground">
-          Something went wrong on our end. You can try refreshing or head back home.
-        </p>
-        <div className="mt-6 flex flex-wrap justify-center gap-2">
+        <p className="da-eyebrow mb-4">Något gick fel</p>
+        <h1 className="da-display text-3xl mb-3">Sidan laddades inte</h1>
+        <p className="text-drake-mid mb-6 text-sm">{error.message}</p>
+        <div className="flex justify-center gap-3">
           <button
-            onClick={() => {
-              router.invalidate();
-              reset();
-            }}
-            className="inline-flex items-center justify-center rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground transition-colors hover:bg-primary/90"
+            onClick={() => { router.invalidate(); reset(); }}
+            className="rounded-md bg-drake-sky px-4 py-2 text-xs font-display uppercase tracking-[0.14em] text-white hover:bg-drake-deep"
           >
-            Try again
+            Försök igen
           </button>
-          <a
-            href="/"
-            className="inline-flex items-center justify-center rounded-md border border-input bg-background px-4 py-2 text-sm font-medium text-foreground transition-colors hover:bg-accent"
-          >
-            Go home
-          </a>
+          <Link to="/" className="rounded-md border border-drake-line px-4 py-2 text-xs font-display uppercase tracking-[0.14em]">
+            Till start
+          </Link>
         </div>
       </div>
     </div>
@@ -72,21 +58,14 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Lovable App" },
-      { name: "description", content: "Lovable Generated Project" },
-      { name: "author", content: "Lovable" },
-      { property: "og:title", content: "Lovable App" },
-      { property: "og:description", content: "Lovable Generated Project" },
+      { title: "Drake Analytics — From Insight to Action" },
+      { name: "description", content: "Interaktivt säljstöd för Drake Analytics — data, AI och analys från strategi till produktion." },
+      { name: "author", content: "Drake Analytics" },
+      { property: "og:title", content: "Drake Analytics — From Insight to Action" },
+      { property: "og:description", content: "Vi hjälper organisationer omsätta data till mätbart värde." },
       { property: "og:type", content: "website" },
-      { name: "twitter:card", content: "summary" },
-      { name: "twitter:site", content: "@Lovable" },
     ],
-    links: [
-      {
-        rel: "stylesheet",
-        href: appCss,
-      },
-    ],
+    links: [{ rel: "stylesheet", href: appCss }],
   }),
   shellComponent: RootShell,
   component: RootComponent,
@@ -96,7 +75,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
 
 function RootShell({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en">
+    <html lang="sv">
       <head>
         <HeadContent />
       </head>
@@ -110,7 +89,6 @@ function RootShell({ children }: { children: React.ReactNode }) {
 
 function RootComponent() {
   const { queryClient } = Route.useRouteContext();
-
   return (
     <QueryClientProvider client={queryClient}>
       <Outlet />
