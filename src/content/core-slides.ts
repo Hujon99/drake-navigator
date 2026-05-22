@@ -31,12 +31,4 @@ export const coreSlides = [
     title: "Vi väljer rätt verktyg — inte favoritverktyg",
     body: "Vi är oberoende. Det betyder att vi har djup expertis i marknadens ledande plattformar och rekommenderar det som passar er.",
   },
-  {
-    n: 5,
-    slug: "your-focus",
-    kind: "dialog" as const,
-    eyebrow: "Kundens fokus",
-    title: "Var är ni idag? Vad är mest relevant för er?",
-    body: "En öppen dialog. Vi vill förstå er situation, era prioriteringar och var den största hävstången ligger — innan vi pratar lösning.",
-  },
 ];

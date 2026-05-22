@@ -12,7 +12,6 @@ import {
   WhoSlide,
   ChainSlide,
   PartnersSlide,
-  DialogSlide,
 } from "@/components/drake/CoreSlides";
 import { ModuleSlide, CaseSlide } from "@/components/drake/ReportSlides";
 
@@ -177,7 +176,7 @@ function ReportPage() {
           {slide.kind === "who" && <WhoSlide slide={slide} />}
           {slide.kind === "chain" && <ChainSlide slide={slide} />}
           {slide.kind === "partners" && <PartnersSlide slide={slide} />}
-          {slide.kind === "dialog" && <DialogSlide slide={slide} />}
+          {/* dialog slide removed */}
         </section>
       ))}
 

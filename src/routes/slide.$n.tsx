@@ -4,7 +4,7 @@ import { useEffect } from "react";
 import { ArrowLeft, ArrowRight } from "lucide-react";
 import { coreSlides } from "@/content/core-slides";
 import { NavBar } from "@/components/drake/NavBar";
-import { CoverSlide, WhoSlide, ChainSlide, PartnersSlide, DialogSlide } from "@/components/drake/CoreSlides";
+import { CoverSlide, WhoSlide, ChainSlide, PartnersSlide } from "@/components/drake/CoreSlides";
 import { slideVariants } from "@/lib/motion";
 
 
@@ -62,7 +62,7 @@ function SlidePage() {
           {slide.kind === "who" && <WhoSlide slide={slide} />}
           {slide.kind === "chain" && <ChainSlide slide={slide} />}
           {slide.kind === "partners" && <PartnersSlide slide={slide} />}
-          {slide.kind === "dialog" && <DialogSlide slide={slide} />}
+          {/* dialog slide removed — slide 4 leder direkt till /hub */}
         </motion.section>
       </AnimatePresence>
 
