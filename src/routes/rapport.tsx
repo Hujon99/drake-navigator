@@ -12,7 +12,6 @@ import {
   WhoSlide,
   ChainSlide,
   PartnersSlide,
-  DialogSlide,
 } from "@/components/drake/CoreSlides";
 import { ModuleSlide, CaseSlide } from "@/components/drake/ReportSlides";
 
