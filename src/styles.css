@@ -231,13 +231,34 @@ html { -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; 
 /* Print: each slide-section becomes its own page */
 @media print {
   @page { size: A4 landscape; margin: 0; }
-  body { background: #fff !important; }
+  html,
+  body {
+    width: 297mm;
+    min-height: 210mm;
+    background: #fff !important;
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
   .no-print, [data-no-print] { display: none !important; }
   .print-page {
+    width: 297mm !important;
+    height: 210mm !important;
+    min-height: 210mm !important;
+    max-height: 210mm !important;
+    overflow: hidden !important;
     page-break-after: always;
     break-after: page;
-    min-height: 100vh;
-    width: 100%;
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+  .print-page > * {
+    width: 297mm !important;
+    height: 210mm !important;
+    min-height: 210mm !important;
+  }
+  .print-page * {
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
   }
   .lenis-prevent, html.lenis, html.lenis body { overflow: visible !important; height: auto !important; }
 }
@@ -296,6 +317,8 @@ html { -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; 
 @media print {
   body.export-print-active {
     background: #fff !important;
+    width: auto;
+    min-height: auto;
   }
   body.export-print-active .export-print-root { background: #fff; }
   body.export-print-active .export-print-pages {
@@ -307,6 +330,7 @@ html { -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; 
   body.export-print-active .export-page {
     box-shadow: none;
     margin: 0;
+    page: export-portrait;
     page-break-after: always;
     break-after: page;
   }
@@ -317,8 +341,7 @@ html { -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; 
   body.export-print-active {
     /* Force portrait A4 with zero default margin (page content has its own padding) */
   }
-  /* Override the global landscape @page rule for the export route */
-  @page { size: A4 portrait; margin: 0; }
+  @page export-portrait { size: A4 portrait; margin: 0; }
 }
 
 /* ─── Leaflet / Drake map markers ─── */
