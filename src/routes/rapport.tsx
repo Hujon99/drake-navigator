@@ -186,8 +186,8 @@ function ReportPage() {
         const linkedCase = m.includeCase ? caseBySlug(m.data.caseSlug) : null;
         return (
           <div key={`mod-${m.slug}`}>
-            <ModuleBody module={m.data} />
-            {linkedCase && <CaseBody case={linkedCase} />}
+            <ModuleSlide module={m.data} />
+            {linkedCase && <CaseSlide case={linkedCase} />}
           </div>
         );
       })}
