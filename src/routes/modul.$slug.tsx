@@ -42,26 +42,34 @@ function ModulePage() {
       <section
         ref={heroRef}
         className="print-page relative min-h-[92vh] flex items-end overflow-hidden text-white da-grain"
-        style={{ background: "linear-gradient(160deg, #0e5f66 0%, #168896 60%, #0a4146 100%)" }}
+        style={{ background: "linear-gradient(160deg, #0e5f66 0%, #168896 60%, #062f33 100%)" }}
       >
         <motion.div style={{ y, opacity }} className="absolute inset-0 pointer-events-none">
           <div className="absolute -top-20 -right-20 w-[40vw] h-[40vw] rounded-full bg-drake-sky/20 blur-3xl" />
           <div className="absolute bottom-10 -left-20 w-[30vw] h-[30vw] rounded-full bg-white/10 blur-3xl" />
         </motion.div>
 
+        {/* Giant outline number */}
+        <div className="absolute right-0 bottom-0 pointer-events-none select-none overflow-hidden">
+          <p className="da-outline-number text-[40vw] md:text-[28vw] leading-none -mr-8 -mb-12 opacity-90">
+            {m.number}
+          </p>
+        </div>
+
         <div className="relative z-10 max-w-6xl mx-auto px-6 md:px-10 pb-20 pt-32 w-full">
-          <motion.p variants={fadeUp} initial="initial" animate="animate" className="da-eyebrow text-drake-sky">
-            Modul {m.number}
-          </motion.p>
+          <motion.div variants={fadeUp} initial="initial" animate="animate" className="flex items-center gap-3 mb-5">
+            <span className="h-px w-10 bg-drake-sky" />
+            <p className="da-eyebrow text-drake-sky">Modul {m.number}</p>
+          </motion.div>
           <motion.h1
             variants={fadeUp} initial="initial" animate="animate" transition={{ delay: 0.05 }}
-            className="da-display mt-5 text-[clamp(44px,8vw,120px)] leading-[0.95] text-white"
+            className="da-display text-[clamp(44px,8vw,120px)] leading-[0.92] text-white"
           >
             {m.title}
           </motion.h1>
           <motion.p
             variants={fadeUp} initial="initial" animate="animate" transition={{ delay: 0.1 }}
-            className="mt-6 text-xl md:text-2xl text-white/85 max-w-3xl font-light"
+            className="mt-6 text-xl md:text-2xl text-white/85 max-w-3xl font-light leading-relaxed"
           >
             {m.tagline}
           </motion.p>
@@ -92,7 +100,7 @@ function ModulePage() {
           {m.outcome.map((o, i) => (
             <motion.div key={i} variants={fadeUp} className="border-t-2 border-drake-sky pt-6">
               {o.metric && (
-                <p className="font-display text-5xl md:text-6xl text-drake-deep leading-none">{o.metric}</p>
+                <p className="font-display text-5xl md:text-7xl leading-none da-gradient-text">{o.metric}</p>
               )}
               <p className="da-eyebrow mt-3 text-drake-mid">{o.label}</p>
               <p className="mt-3 text-drake-mid leading-relaxed">{o.body}</p>
