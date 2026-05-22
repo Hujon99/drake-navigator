@@ -1,93 +1,85 @@
-# Premium designpass — Drake Analytics presentation
 
-Höja hela presentationen från "fungerande mockup" till "färdigt premium säljstöd". Slide för slide-genomgång, närmare Drakes formspråk (typografi, layered tealfält, generösa rytm, finess), bättre tillgänglighet, och riktiga loggor på slide 2 och slide 4.
+## Mål
 
-## Logohämtning (autonomt)
+Ge säljaren ett snabbt sätt att bygga en skräddarsydd PDF-rapport från befintligt innehåll:
+1. Välj vilka av de 5 **grunddelarna** (kärnsekvensen) som ska med.
+2. Välj vilka av de **6 modulerna** som ska med — och för varje vald modul om dess **kundcase** också ska ingå.
+3. Klicka *Skapa PDF* → en print-optimerad sida öppnas och webbläsarens "Spara som PDF" triggas.
 
-Hämtar från officiella källor via Firecrawl/web (sedan optimerar lokalt, sparas till `src/assets/drake/logos/`):
+## UX-flöde
 
-**Kundloggor (slide 2 — "Kunder vi arbetar med")**
-Atlas Copco, Siemens Energy, Alfa Laval, Scania, Swedbank, PostNord, Migrationsverket, Skatteverket.
+```text
+[Hub] ──"Skapa PDF"──▶ /export (wizard)
+                          │
+        ┌─────────────────┼─────────────────┐
+        ▼                 ▼                 ▼
+   Steg 1: Grund     Steg 2: Moduler    Steg 3: Granska
+   (5 checkboxar)    (6 kort med två    + omslagsinfo
+                      checkboxar var:    (kundnamn, datum)
+                      modul / case)      ─▶ "Skapa PDF"
+                                            │
+                                            ▼
+                                    /export/print?state=…
+                                    (auto window.print)
+```
 
-**Partner/tech-loggor (slide 4 — färgade originalmärken)**
-- Data Platforms: Snowflake, Microsoft Fabric, Databricks, Google Cloud, Azure
-- BI: Power BI, Qlik, Tableau
-- AI: Azure OpenAI, Copilot, Vertex AI, Cortex, DataRobot
-- Process Intelligence: mpmX
-- Planning: Aimplan, Planacy, Dataplus
-- Automation: Power Platform, UiPath
-- Integration: dbt, Talend, Alteryx, Azure Data Factory
+- **Steg 1** – lista de 5 grundslides från `coreSlides` med titel + kort beskrivning. "Markera alla / inga".
+- **Steg 2** – grid med de 6 modulerna från `modules.ts`. Varje kort: modulnamn, tagline, två toggles ("Inkludera modul", "Inkludera kundcase"). Case-toggle disabled när modulen inte är vald.
+- **Steg 3** – sammanfattning + två valfria fält: **Kundnamn** och **Datum** (default idag), används på omslaget. Knapp *Skapa PDF*.
 
-Säg till om någon logga inte går att hämta lagligt så pingar jag dig att ladda upp originalpaketet (du nämnde att du har det).
+## Print-rendering
 
-## Slide-för-slide-uppgraderingar
+En egen route `/export/print` läser urvalet från URL (base64-encoded JSON) och renderar allt vertikalt staplat i ett print-optimerat layout. När sidan mountat och fonter laddat → `window.print()`. Användaren väljer "Spara som PDF" i sitt OS.
 
-**Slide 1 — From Insight to Action** (cover)
-- Skikta bakgrunden: djup teal-radial + en svag konturlinjekarta/dataflöde-grafik som rör sig långsamt + Drakes molnformer i lägre opacitet.
-- Stor split-typografi: "FROM / INSIGHT / TO ACTION" med Share Bold, hairline-rule i drake-sky mellan rader.
-- Animated counter eyebrow ("Sedan 2014 · 50 specialister · 100% oberoende") som tickar in.
-- Subtilt grain + vignette för premiumkänsla. Scroll/Next-affordance längst ner ("Tryck → för att börja").
+Fördelar med detta framför jsPDF/pdf-lib:
+- Återanvänder vår befintliga styling — slides ser identiska ut.
+- Ingen extra dependency, ingen serverless rendering att underhålla.
+- Användaren får riktig vektoriserad text + selectable text i PDF.
 
-**Slide 2 — Vilka vi är**
-- Vänster: större hierarki, stat-grid blir hero (4 stora siffror med tunn underline). Roller blir en horisontell tickrad istället för chips.
-- Höger: byt nordenkartan till en mer redaktionell komposition — karta i bakgrund med pulserande punkter på Stockholm/Göteborg/Linköping/Jönköping.
-- **Ny rad längst ner: "Kunder vi arbetar med"** — gråskala-loggor i en lugn rad (Atlas Copco, Siemens Energy, Alfa Laval, Scania, Swedbank, PostNord, Migrationsverket, Skatteverket), hover lyfter till färg.
+### Sidstruktur i print-vyn
 
-**Slide 3 — Hela kedjan**
-- Byt 4-kort-rad mot en riktig flow-visualisering: connectorprickar, animerade linjer mellan stegen, ikon per steg (Database, Layers, ShieldCheck, Sparkles från lucide).
-- Ovanför flowet: 3 "lager"-pills (Automation / Agentic AI / Process Intelligence) som ligger som ett band över hela kedjan — illustrerar att de spänner tvärs.
-- Använd drake-deep band-bakgrund på flow-sektionen för kontrast.
+1. **Omslag** (alltid) – Drake-logo, "Rapport för {kundnamn}", datum, lista av vad rapporten innehåller.
+2. **Innehållsförteckning** (alltid) – numrerad lista.
+3. **Grunddelar** – en print-anpassad version per vald `coreSlide` (kind: cover/who/chain/partners/dialog).
+4. **Moduler** – per vald modul: problem, vad-vi-gör, utfall, partners, nästa steg.
+5. **Kundcase** – per vald case: klient, utmaning, approach, resultat, tech.
 
-**Slide 4 — Partnerskap**
-- Ersätt textchips med färgade originalloggor i ett rutnät, grupperat per kategori med tunna avdelare.
-- Hover: lyft + tunn drake-sky-ram. Loggorna får ha färg (matchar PPT).
-- Header får ett kort manifest: "Oberoende · 5 partnerprogram · 20+ plattformar".
+Varje "slide" är en `<section class="print-page">` med `break-after: page` så det blir exakt en A4-sida per block.
 
-**Slide 5 — Kundens fokus**
-- Behåll mörk closing-grå men lägg på drake-deep gradient + data-human bilden större och positionerad som hero-element höger.
-- Modulchips blir större, numrerade kort (01–06) i 3×2 grid med hover-glow, så det blir den faktiska språngbrädan till hub.
-- Lägg in en subtil "→ ESC eller klicka för att öppna områdeskartan" hint.
+## Filer som skapas
 
-**Hub (/hub)**
-- Lyft korten: större siffror, gradient-stroke på hover, micro-icon per modul, partner-chips byts mot små färgade loggor.
-- Multi-case CTA: byt platt drake-deep mot animerad gradient + en metric-strip (3 KPI:er) inline.
+- `src/routes/export.tsx` – wizard (3 steg, lokal state, ingen backend).
+- `src/routes/export.print.tsx` – print-vy, auto-`window.print()` efter mount.
+- `src/components/export/StepCoreSelector.tsx`
+- `src/components/export/StepModuleSelector.tsx`
+- `src/components/export/StepReview.tsx`
+- `src/components/export/print/CorePrintSlide.tsx` – switch på `kind` → 5 print-varianter.
+- `src/components/export/print/ModulePrintSlide.tsx`
+- `src/components/export/print/CasePrintSlide.tsx`
+- `src/components/export/print/CoverPrintSlide.tsx`
+- `src/lib/export-state.ts` – typer + base64 encode/decode av urvalsstate.
 
-**Modulsidor (/modul/$slug)**
-- Hero: lägg in modulnummer som gigantisk outline-siffra bakom titeln (typ "06" i 40vw outline).
-- Solution-kort: numrerad badge, ikon, tydligare hover.
-- Outcomes: stora metric-siffror får gradient text-fill (sky → deep).
-- "Plattformar & partners" sektion använder de nya färgade loggorna.
+## Filer som ändras
 
-**Casesidor (/case/$slug)**
-- Cleanup av spacing, metric-strip blir den visuella förankringen, lägg in eyebrow + kundlogga (gråskala) i hero.
+- `src/routes/hub.tsx` – lägg till "Skapa PDF"-knapp i headern bredvid HUB/PDF.
+- `src/styles.css` – ny `@media print` block: A4 page-size, dölj nav/chrome, force-color-adjust, sidbrytningar, kompakta typsnitt för print.
 
-**Navigation & detaljer (globalt)**
-- NavBar: subtilare backdrop, drake-sky underline-indikator på hover.
-- Knappar/CTAs: konsekvent rounded-pill med svag inner-shadow.
-- Lägg till `prefers-reduced-motion` guards på alla blob-/parallax-animationer.
+## Tekniska detaljer
 
-## Tillgänglighet
+- **State-transport**: `btoa(JSON.stringify({ core: number[], modules: { slug, includeCase }[], customer, date }))` i query-param. Print-routen avkodar i loader/component.
+- **Print-CSS**: `@page { size: A4; margin: 16mm 14mm }`. Class `.print-page { break-after: page; -webkit-print-color-adjust: exact; print-color-adjust: exact }`. Wrappa allt utanför print-content i `@media print { display: none }`.
+- **Auto-print**: `useEffect` med `document.fonts.ready.then(() => window.print())`. Lägg `afterprint` listener som visar en "Klar — stäng fliken"-overlay.
+- **Inga nya npm-paket** behövs.
 
-- Säkerställ WCAG AA: brödtext på vit ≥ `--da-mid-gray-2` (#646363, 4.5:1 ✓), aldrig drake-sky på vit för text (kontrast bara 2.4:1 — endast för accenter/ikoner/stora rubriker ≥ 24px bold som AA Large).
-- White text på drake-closing (#5E5E5E) klarar inte AA — byt closing-bakgrund till mörkare drake-deep (#0E5F66) eller lägg overlay.
-- Alla nya loggor får alt-text + `aria-label` på länkar.
-- Fokus-ring (drake-sky 2px outline) på alla interaktiva element.
-- Reduced-motion respekteras på parallax/blobs.
+## Edge cases
 
-## Teknik
+- Inget valt i något steg → *Nästa*/*Skapa PDF* disabled med tooltip.
+- Print-route utan state → visa felmeddelande med länk tillbaka till `/export`.
+- Långa textblock i moduler/cases → CSS `orphans: 3; widows: 3` så stycken inte splittras illa.
 
-- Loggor: hämta SVG där möjligt (skarpa, små filer), annars PNG@2x. Lagras i `src/assets/drake/logos/{customers,partners}/`.
-- Ny komponent `LogoStrip.tsx` (gråskala→färg på hover) för kundraden.
-- Ny komponent `PartnerGrid.tsx` (grupperat med kategoriavdelare).
-- Ny komponent `ValueChainFlow.tsx` med SVG-paths + Framer Motion stroke-dash animation.
-- Lägg till `usePrefersReducedMotion` hook och guarda blob/parallax.
-- Inga ändringar av routes/content-struktur — bara presentation/komponenter + assets.
-- Inga backend-/datatillägg.
+## Out of scope (för denna iteration)
 
-## Leveransordning
-
-1. Hämta + optimera alla loggor.
-2. Globala tokens + a11y-fixar (closing-färg, fokus-ringar, reduced-motion).
-3. Slide 1 → 5 i ordning.
-4. Hub + modul + case-polishing.
-5. QA-pass (kolla varje route i preview, kontrast med devtools).
+- Server-renderad PDF (kan läggas till senare via puppeteer i en server-route om browser-print inte räcker).
+- Anpassa enskilda textstycken före export.
+- Spara/återanvända exportkonfigurationer.
+- Branding/färganpassning per kund.
