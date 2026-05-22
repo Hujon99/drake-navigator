@@ -43,12 +43,12 @@ Modulen dyker automatiskt upp på hub-sidan (`/hub`) och får en egen route på 
 
 ## Designsystem
 
-Drake-färger, typsnitt (Share Bold + Roboto) och tokens ligger i `src/styles.css`. Logos och bilder i `src/assets/drake/`.
+Drake-färger, typsnitt (Barlow Condensed + Roboto) och tokens ligger i `src/styles.css`. Logos och bilder i `src/assets/drake/`.
 
 - Primär: `#50BCBD` (Drake Sky)
 - Accent: `#168896` (Drake Ground)
 - Hero/closing: `#0E5F66` (Drake Deep) / `#5E5E5E` (Closing Gray)
-- Headings: Share Bold UPPERCASE
+- Headings: Barlow Condensed UPPERCASE
 - Brödtext: Roboto
 
 ## Vad som inte ingår (v1)
