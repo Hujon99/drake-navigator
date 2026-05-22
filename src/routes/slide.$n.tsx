@@ -315,7 +315,7 @@ export function WhoSlide({ slide }: { slide: typeof coreSlides[number] }) {
 
 
 /* ───────────────── Slide 3: Value chain ───────────────── */
-function ChainSlide({ slide }: { slide: typeof coreSlides[number] }) {
+export function ChainSlide({ slide }: { slide: typeof coreSlides[number] }) {
   const steps = [
     { label: "Datakällor", sub: "ERP · CRM · WMS · SaaS · IoT", icon: Database },
     { label: "Plattform", sub: "Lakehouse · ELT · Governance", icon: Layers },
