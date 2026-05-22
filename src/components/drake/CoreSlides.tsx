@@ -285,35 +285,35 @@ export function ChainSlide({ slide }: { slide: typeof coreSlides[number] }) {
 /* ───────────────── Slide 4: Partners ───────────────── */
 export function PartnersSlide({ slide }: { slide: typeof coreSlides[number] }) {
   return (
-    <div className="w-full min-h-screen flex flex-col justify-center px-8 md:px-16 py-28 bg-white">
+    <div className="w-full min-h-screen flex flex-col justify-center px-8 md:px-12 py-16 bg-white">
       <motion.div variants={stagger(0.04)} initial="initial" animate="animate" className="max-w-7xl mx-auto w-full">
-        <motion.div variants={fadeUp} className="flex items-center gap-3 mb-5">
+        <motion.div variants={fadeUp} className="flex items-center gap-3 mb-4">
           <span className="h-px w-10 bg-drake-sky" />
           <p className="da-eyebrow">{slide.eyebrow}</p>
         </motion.div>
 
-        <div className="grid md:grid-cols-[1.1fr_1fr] gap-12 items-start">
+        <div className="grid md:grid-cols-[0.9fr_1.4fr] gap-10 items-start">
           <motion.div variants={fadeUp}>
-            <h2 className="da-display text-[clamp(32px,4.6vw,60px)] max-w-2xl">
+            <h2 className="da-display text-[clamp(28px,3.4vw,46px)] max-w-xl leading-[1.05]">
               Vi väljer <span className="da-gradient-text">rätt</span> verktyg<br />— inte favoritverktyg
             </h2>
-            <p className="da-ingress mt-6 max-w-xl">{slide.body}</p>
+            <p className="da-ingress mt-4 max-w-md text-[15px]">{slide.body}</p>
 
-            <div className="mt-10 grid grid-cols-3 gap-5 max-w-md">
+            <div className="mt-6 grid grid-cols-3 gap-4 max-w-sm">
               {[
                 { n: "5", l: "Partnerprogram" },
                 { n: "20+", l: "Plattformar" },
                 { n: "100%", l: "Oberoende" },
               ].map((s) => (
-                <div key={s.l} className="border-t border-drake-sky pt-3">
-                  <p className="font-display text-3xl text-drake-deep">{s.n}</p>
-                  <p className="da-eyebrow mt-2 text-drake-mid text-[10px]">{s.l}</p>
+                <div key={s.l} className="border-t border-drake-sky pt-2">
+                  <p className="font-display text-2xl text-drake-deep">{s.n}</p>
+                  <p className="da-eyebrow mt-1 text-drake-mid text-[10px]">{s.l}</p>
                 </div>
               ))}
             </div>
           </motion.div>
 
-          <div className="md:max-h-[70vh] md:overflow-auto md:pr-2">
+          <div>
             <PartnerGrid />
           </div>
         </div>
