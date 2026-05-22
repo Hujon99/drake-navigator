@@ -193,8 +193,11 @@ function CoverSlide({ slide }: { slide: typeof coreSlides[number] }) {
           to Action.
         </motion.h1>
 
-        <motion.div variants={fadeUp} className="mt-14 max-w-2xl">
-          <p className="text-white/90 text-lg md:text-xl font-light leading-relaxed">
+        <motion.div variants={fadeUp} className="mt-14 max-w-3xl">
+          <p
+            className="text-white text-2xl md:text-3xl font-light leading-[1.4] tracking-[-0.01em]"
+            style={{ textShadow: "0 1px 20px rgba(0,0,0,0.35)" }}
+          >
             {slide.body}
           </p>
         </motion.div>
