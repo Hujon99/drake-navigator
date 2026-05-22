@@ -29,15 +29,17 @@ function ExportPrintPage() {
     if (!state) return;
     let cancelled = false;
     const trigger = () => {
-      if (!cancelled) {
+      if (cancelled) return;
+      try {
         window.print();
         setPrinted(true);
+      } catch {
+        // Auto-print may be blocked (e.g. iframe). User can click the toolbar button.
       }
     };
-    // Wait for fonts and a frame so layout settles
     const fontsReady = (document as Document & { fonts?: { ready: Promise<unknown> } }).fonts?.ready;
     Promise.resolve(fontsReady).then(() => {
-      setTimeout(trigger, 350);
+      setTimeout(trigger, 500);
     });
     const onAfter = () => setPrinted(true);
     window.addEventListener("afterprint", onAfter);
