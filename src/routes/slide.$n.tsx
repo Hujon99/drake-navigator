@@ -253,12 +253,6 @@ function WhoSlide({ slide }: { slide: typeof coreSlides[number] }) {
     "Solution Architects",
     "Low Code Engineers",
   ];
-  const cities = [
-    { name: "Stockholm", top: "44%", left: "55%" },
-    { name: "Göteborg", top: "60%", left: "38%" },
-    { name: "Linköping", top: "55%", left: "52%" },
-    { name: "Jönköping", top: "60%", left: "48%" },
-  ];
 
   return (
     <div className="w-full min-h-screen bg-white flex flex-col">
