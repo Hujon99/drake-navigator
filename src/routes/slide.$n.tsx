@@ -436,7 +436,7 @@ export function PartnersSlide({ slide }: { slide: typeof coreSlides[number] }) {
 }
 
 /* ───────────────── Slide 5: Dialog ───────────────── */
-function DialogSlide({ slide }: { slide: typeof coreSlides[number] }) {
+export function DialogSlide({ slide }: { slide: typeof coreSlides[number] }) {
   return (
     <div
       className="relative w-full min-h-screen flex items-center justify-center text-white overflow-hidden da-grain"
