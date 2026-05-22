@@ -33,7 +33,7 @@ Allt textinnehåll bor som typade TypeScript-objekt — inga JSX-ändringar beh�
 2. Lägg till ett objekt i `modules`-arrayen i `src/content/modules.ts`.
 3. Lägg till motsvarande kundcase i `cases.ts` (eller peka `caseSlug` mot ett befintligt).
 
-Modulen dyker automatiskt upp på hub-sidan, i kundens fokus-slide (slide 5) och får en egen route på `/modul/<slug>`.
+Modulen dyker automatiskt upp på hub-sidan (`/hub`) och får en egen route på `/modul/<slug>`.
 
 ### Lägga till ett nytt kundcase
 
