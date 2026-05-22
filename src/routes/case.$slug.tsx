@@ -1,12 +1,12 @@
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
-import { motion } from "motion/react";
 import { ArrowLeft, ArrowRight } from "lucide-react";
 import { caseBySlug } from "@/content/cases";
 import { moduleBySlug } from "@/content/modules";
 import type { CaseContent, ModuleSlug } from "@/content/types";
 import { NavBar } from "@/components/drake/NavBar";
+import { CaseBody } from "@/components/drake/CaseBody";
 import { useLenis } from "@/lib/use-lenis";
-import { fadeUp, stagger } from "@/lib/motion";
+
 
 export const Route = createFileRoute("/case/$slug")({
   component: CasePage,
