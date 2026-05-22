@@ -62,7 +62,7 @@ export function ModuleBody({ module: m }: { module: ModuleContent }) {
                 initial="initial"
                 animate="animate"
                 transition={{ delay: 0.05 }}
-                className="da-display text-[clamp(44px,8vw,120px)] leading-[0.92] text-white"
+                className="da-display text-[clamp(40px,6.2vw,92px)] leading-[0.95] text-white break-words hyphens-auto"
               >
                 {m.title}
               </motion.h1>
