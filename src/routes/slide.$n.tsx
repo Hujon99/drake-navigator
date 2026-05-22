@@ -133,9 +133,18 @@ function CoverSlide({ slide }: { slide: typeof coreSlides[number] }) {
           "radial-gradient(ellipse at 25% 15%, #1a9aa7 0%, #168896 30%, #0e5f66 55%, #062f33 100%)",
       }}
     >
-      {/* Soft animated clouds */}
+      {/* Soft animated cloud (top-left only — removed bottom-right jpg that created a visible rectangle) */}
       <img src={cloud1} alt="" aria-hidden className="da-blob absolute -top-40 -left-40 w-[65vw] opacity-25 mix-blend-screen pointer-events-none" />
-      <img src={cloud3} alt="" aria-hidden className="da-blob absolute -bottom-48 -right-48 w-[55vw] opacity-20 mix-blend-screen pointer-events-none" style={{ animationDelay: "-6s" }} />
+
+      {/* Soft radial glow in bottom-right (replaces the jpg cloud) */}
+      <div
+        aria-hidden
+        className="absolute -bottom-[30vw] -right-[20vw] w-[80vw] h-[80vw] rounded-full pointer-events-none"
+        style={{
+          background:
+            "radial-gradient(circle, rgba(80,188,189,0.22) 0%, rgba(80,188,189,0.08) 40%, transparent 70%)",
+        }}
+      />
 
       {/* Decorative grid lines */}
       <svg aria-hidden className="absolute inset-0 w-full h-full opacity-[0.07] pointer-events-none" preserveAspectRatio="none">
@@ -158,36 +167,53 @@ function CoverSlide({ slide }: { slide: typeof coreSlides[number] }) {
       >
         <motion.div variants={fadeUp} className="flex items-center gap-3 mb-8">
           <span className="h-px w-12 bg-drake-sky" />
-          <p className="da-eyebrow text-drake-sky">{slide.eyebrow} · Sedan 2014</p>
+          <p
+            className="da-eyebrow text-white font-semibold"
+            style={{ textShadow: "0 1px 14px rgba(0,0,0,0.45)" }}
+          >
+            {slide.eyebrow} · Sedan 2014
+          </p>
         </motion.div>
 
         <motion.h1
           variants={fadeUp}
           className="da-display text-[clamp(56px,11vw,180px)] leading-[0.88] text-white tracking-tight"
+          style={{ textShadow: "0 4px 40px rgba(0,0,0,0.25)" }}
         >
           From
           <br />
-          <span className="da-gradient-text">Insight</span>
+          <span
+            className="text-drake-sky"
+            style={{ textShadow: "0 0 50px rgba(80,188,189,0.5)" }}
+          >
+            Insight
+          </span>
           <br />
           to Action.
         </motion.h1>
 
-        <motion.div variants={fadeUp} className="mt-12 grid md:grid-cols-[1fr_auto] gap-10 items-end max-w-5xl">
-          <p className="text-white/80 text-lg md:text-xl font-light leading-relaxed max-w-xl">
+        <motion.div variants={fadeUp} className="mt-14 max-w-2xl">
+          <p className="text-white/90 text-lg md:text-xl font-light leading-relaxed">
             {slide.body}
           </p>
-          <div className="flex gap-8 text-white/70">
-            {[
-              { n: "50+", l: "Specialister" },
-              { n: "10+", l: "År av leveranser" },
-              { n: "100%", l: "Oberoende" },
-            ].map((s) => (
-              <div key={s.l}>
-                <p className="font-display text-3xl text-drake-sky">{s.n}</p>
-                <p className="text-[10px] uppercase tracking-[0.18em] mt-1 text-white/60">{s.l}</p>
-              </div>
-            ))}
-          </div>
+        </motion.div>
+
+        <motion.div
+          variants={fadeUp}
+          className="mt-12 flex flex-wrap gap-x-14 gap-y-6"
+        >
+          {[
+            { n: "50+", l: "Specialister" },
+            { n: "10+", l: "År av leveranser" },
+            { n: "100%", l: "Oberoende" },
+          ].map((s) => (
+            <div key={s.l} className="border-t border-drake-sky/60 pt-3 min-w-[120px]">
+              <p className="font-display text-4xl md:text-5xl text-white">{s.n}</p>
+              <p className="text-[10px] uppercase tracking-[0.22em] mt-2 text-drake-sky font-semibold">
+                {s.l}
+              </p>
+            </div>
+          ))}
         </motion.div>
       </motion.div>
 
@@ -196,12 +222,15 @@ function CoverSlide({ slide }: { slide: typeof coreSlides[number] }) {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 1.2 }}
-        className="absolute bottom-20 right-10 text-white/50 text-[11px] font-display uppercase tracking-[0.2em] hidden md:flex items-center gap-2"
+        className="absolute bottom-24 right-10 text-white/60 text-[11px] font-display uppercase tracking-[0.2em] hidden md:flex items-center gap-2"
       >
         Tryck <span className="px-2 py-0.5 border border-white/30 rounded">→</span> för att börja
       </motion.div>
 
-      <SlideFooterLogo variant="light" />
+      {/* Larger cover logo */}
+      <div className="absolute bottom-8 right-10 md:bottom-10 md:right-14">
+        <Logo variant="light" className="h-10 md:h-14" />
+      </div>
     </div>
   );
 }
