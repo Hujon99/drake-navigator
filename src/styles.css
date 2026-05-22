@@ -251,6 +251,11 @@ html { -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; 
     -webkit-print-color-adjust: exact !important;
     print-color-adjust: exact !important;
   }
+  .print-page > * {
+    width: 297mm !important;
+    height: 210mm !important;
+    min-height: 210mm !important;
+  }
   .print-page * {
     -webkit-print-color-adjust: exact !important;
     print-color-adjust: exact !important;
@@ -312,6 +317,8 @@ html { -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; 
 @media print {
   body.export-print-active {
     background: #fff !important;
+    width: auto;
+    min-height: auto;
   }
   body.export-print-active .export-print-root { background: #fff; }
   body.export-print-active .export-print-pages {
