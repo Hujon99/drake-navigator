@@ -53,7 +53,7 @@ html { -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; 
   --color-drake-rule: var(--da-light-gray-2);
   --color-drake-wash: var(--da-light-gray-1);
 
-  --font-display: "Share", Impact, sans-serif;
+  --font-display: "Barlow Condensed", "Arial Narrow", Impact, sans-serif;
   --font-body: "Roboto", system-ui, sans-serif;
   --font-sans: "Roboto", system-ui, sans-serif;
 }
