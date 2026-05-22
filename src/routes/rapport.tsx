@@ -1,7 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { useMemo } from "react";
+import { useMemo, useState } from "react";
 import { z } from "zod";
-import { Printer } from "lucide-react";
+import { Download, Loader2 } from "lucide-react";
 import { coreSlides } from "@/content/core-slides";
 import { modules } from "@/content/modules";
 import { caseBySlug } from "@/content/cases";
@@ -19,6 +19,8 @@ import { CaseBody } from "@/components/drake/CaseBody";
 
 
 const searchSchema = z.object({ s: z.string().optional() });
+const pdfPageWidth = 1600;
+const pdfPageHeight = Math.round((pdfPageWidth * 210) / 297);
 
 export const Route = createFileRoute("/rapport")({
   validateSearch: searchSchema,
@@ -29,6 +31,63 @@ export const Route = createFileRoute("/rapport")({
 function ReportPage() {
   const { s } = Route.useSearch();
   const state = useMemo<ExportState | null>(() => (s ? decodeExportState(s) : null), [s]);
+  const [isExporting, setIsExporting] = useState(false);
+  const [exportError, setExportError] = useState<string | null>(null);
+
+  const handleExportPdf = async () => {
+    setIsExporting(true);
+    setExportError(null);
+
+    try {
+      const [{ default: html2canvas }, { jsPDF }] = await Promise.all([
+        import("html2canvas"),
+        import("jspdf"),
+      ]);
+
+      await document.fonts.ready;
+
+      const pages = Array.from(document.querySelectorAll<HTMLElement>(".print-page"));
+      if (pages.length === 0) throw new Error("Inga rapportsidor hittades.");
+
+      const pdf = new jsPDF({ orientation: "landscape", unit: "mm", format: "a4", compress: true });
+
+      for (const [index, page] of pages.entries()) {
+        const canvas = await html2canvas(page, {
+          backgroundColor: "#ffffff",
+          scale: 1.5,
+          useCORS: true,
+          allowTaint: true,
+          logging: false,
+          width: pdfPageWidth,
+          height: pdfPageHeight,
+          windowWidth: pdfPageWidth,
+          windowHeight: pdfPageHeight,
+          onclone: (clonedDocument) => {
+            clonedDocument.documentElement.classList.add("pdf-capture-mode");
+            clonedDocument.body.classList.add("pdf-capture-mode");
+            clonedDocument.querySelectorAll<HTMLElement>(".print-page").forEach((clonedPage) => {
+              clonedPage.style.width = `${pdfPageWidth}px`;
+              clonedPage.style.height = `${pdfPageHeight}px`;
+              clonedPage.style.minHeight = `${pdfPageHeight}px`;
+              clonedPage.style.maxHeight = `${pdfPageHeight}px`;
+              clonedPage.style.overflow = "hidden";
+            });
+          },
+        });
+
+        if (index > 0) pdf.addPage("a4", "landscape");
+        pdf.addImage(canvas.toDataURL("image/jpeg", 0.98), "JPEG", 0, 0, 297, 210, undefined, "FAST");
+      }
+
+      const customer = state?.customer.trim() ? state.customer.trim().replace(/[^a-z0-9åäö_-]+/gi, "-") : "rapport";
+      pdf.save(`drake-analytics-${customer}.pdf`);
+    } catch (error) {
+      console.error(error);
+      setExportError("PDF:en kunde inte skapas. Ladda om sidan och försök igen.");
+    } finally {
+      setIsExporting(false);
+    }
+  };
 
   if (!state) {
     return (
@@ -73,13 +132,21 @@ function ReportPage() {
           </Link>
           <button
             type="button"
-            onClick={() => window.print()}
+            onClick={handleExportPdf}
+            disabled={isExporting}
             className="inline-flex items-center gap-2 bg-white text-drake-deep px-4 py-2 rounded-md font-display uppercase tracking-[0.14em] text-xs hover:bg-drake-sky hover:text-white transition-colors"
           >
-            <Printer size={14} /> Skriv ut / Spara som PDF
+            {isExporting ? <Loader2 size={14} className="animate-spin" /> : <Download size={14} />}
+            {isExporting ? "Skapar PDF" : "Ladda ner PDF"}
           </button>
         </div>
       </div>
+
+      {exportError && (
+        <div className="no-print bg-red-50 px-6 py-3 text-sm text-red-700" data-no-print>
+          {exportError}
+        </div>
+      )}
 
       {/* Core slides */}
       {cores.map((slide) => (
