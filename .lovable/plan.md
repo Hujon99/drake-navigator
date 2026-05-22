@@ -1,110 +1,93 @@
-# Drake Analytics — Interaktiv Säljpresentation (v1)
+# Premium designpass — Drake Analytics presentation
 
-En webbaserad "choose your own adventure"-presentation som ersätter PowerPoint i kundmöten. Säljaren navigerar live mellan kärnsekvens, hubb (områdeskarta) och fördjupningsmoduler. Byggs i projektets befintliga stack (TanStack Start + React + Tailwind) med Drake Analytics designsystem fullt applicerat. Distribueras som publicerad Lovable-länk; React i bakgrunden påverkar inte delning.
+Höja hela presentationen från "fungerande mockup" till "färdigt premium säljstöd". Slide för slide-genomgång, närmare Drakes formspråk (typografi, layered tealfält, generösa rytm, finess), bättre tillgänglighet, och riktiga loggor på slide 2 och slide 4.
 
-## Designprinciper
+## Logohämtning (autonomt)
 
-Hämtas direkt från det uppladdade designsystemet:
+Hämtar från officiella källor via Firecrawl/web (sedan optimerar lokalt, sparas till `src/assets/drake/logos/`):
 
-- **Färg**: Drake Sky `#50BCBD` primär, `#168896` accent, `#5E5E5E` closing-yta, vit bakgrund. Inga gradienter som dominerar, ingen palett utanför teal-skalan.
-- **Typografi**: Share Bold UPPERCASE för rubriker, Roboto för brödtext. Max 3 vikter / 4 storlekar per layout.
-- **Logo**: alltid nere till höger utom på cover (Drake Cloud-bakgrund + logo).
-- **Ton**: konsultativ, direkt, analytisk — aldrig säljig/buzzword-tung. Svenska genomgående.
-- **Premium-känsla**: Framer Motion för slide-transitions (cross-fade + subtil scale/translate), Lenis för smooth scroll inom långa moduler, restrained motion — inte animationstung.
+**Kundloggor (slide 2 — "Kunder vi arbetar med")**
+Atlas Copco, Siemens Energy, Alfa Laval, Scania, Swedbank, PostNord, Migrationsverket, Skatteverket.
 
-## Informationsarkitektur
+**Partner/tech-loggor (slide 4 — färgade originalmärken)**
+- Data Platforms: Snowflake, Microsoft Fabric, Databricks, Google Cloud, Azure
+- BI: Power BI, Qlik, Tableau
+- AI: Azure OpenAI, Copilot, Vertex AI, Cortex, DataRobot
+- Process Intelligence: mpmX
+- Planning: Aimplan, Planacy, Dataplus
+- Automation: Power Platform, UiPath
+- Integration: dbt, Talend, Alteryx, Azure Data Factory
 
-```text
-┌───────────────────────────────────────────────────┐
-│  KÄRNSEKVENS (linjär, ← →)                        │
-│  1. From Insight to Action  (cover)               │
-│  2. Vilka vi är             (kultur)              │
-│  3. Hela kedjan             (pipeline)            │
-│  4. Partnerskap             (logos)               │
-│  5. Kundens fokus           (dialog)              │
-│  6. Områdeskarta            ──► HUB               │
-└───────────────────────────────────────────────────┘
-                      │
-        ┌─────────────┼─────────────┐
-        ▼             ▼             ▼
-   [Modul 1..6]   [Kundcase]   ← Tillbaka till hub
-```
+Säg till om någon logga inte går att hämta lagligt så pingar jag dig att ladda upp originalpaketet (du nämnde att du har det).
 
-**6 moduler**, varje med struktur *Problem → Vad vi gör → Exempel/utfall → Nästa steg*:
+## Slide-för-slide-uppgraderingar
 
-1. Dataplattform
-2. Process Intelligence (AI/agentic-vinkel framhävd)
-3. Applications / Automation / Agentic AI
-4. BI & Analytics
-5. Planning & Writeback
-6. Data Strategy
+**Slide 1 — From Insight to Action** (cover)
+- Skikta bakgrunden: djup teal-radial + en svag konturlinjekarta/dataflöde-grafik som rör sig långsamt + Drakes molnformer i lägre opacitet.
+- Stor split-typografi: "FROM / INSIGHT / TO ACTION" med Share Bold, hairline-rule i drake-sky mellan rader.
+- Animated counter eyebrow ("Sedan 2014 · 50 specialister · 100% oberoende") som tickar in.
+- Subtilt grain + vignette för premiumkänsla. Scroll/Next-affordance längst ner ("Tryck → för att börja").
 
-**Kundcase**: 1 case per modul (placeholder-struktur, baserat på info i bifogad PPTX — Partner Inkasso, Siemens Energy, AbbVie m.fl.) + 1 multi-område-case ("Setlr"-strukturen).
+**Slide 2 — Vilka vi är**
+- Vänster: större hierarki, stat-grid blir hero (4 stora siffror med tunn underline). Roller blir en horisontell tickrad istället för chips.
+- Höger: byt nordenkartan till en mer redaktionell komposition — karta i bakgrund med pulserande punkter på Stockholm/Göteborg/Linköping/Jönköping.
+- **Ny rad längst ner: "Kunder vi arbetar med"** — gråskala-loggor i en lugn rad (Atlas Copco, Siemens Energy, Alfa Laval, Scania, Swedbank, PostNord, Migrationsverket, Skatteverket), hover lyfter till färg.
 
-## Navigation & interaktion
+**Slide 3 — Hela kedjan**
+- Byt 4-kort-rad mot en riktig flow-visualisering: connectorprickar, animerade linjer mellan stegen, ikon per steg (Database, Layers, ShieldCheck, Sparkles från lucide).
+- Ovanför flowet: 3 "lager"-pills (Automation / Agentic AI / Process Intelligence) som ligger som ett band över hela kedjan — illustrerar att de spänner tvärs.
+- Använd drake-deep band-bakgrund på flow-sektionen för kontrast.
 
-- **Persistent top-bar**: vänster = "← Tillbaka till översikt" (visas utanför hub), mitten = breadcrumb (Kärnsekvens 3/6 · Modul: BI & Analytics), höger = "Exportera PDF".
-- **Kärnsekvens**: vänster/höger piltangenter + on-screen-pilar, slide 6 (hub) är klickbar karta.
-- **Hub (områdeskarta)**: visuellt rutnät över de 6 modulerna i Drake-teal, hover lyfter kortet, klick går till modul.
-- **Modulsida**: scrollbar one-pager (Lenis smooth scroll) med de 4 sektionerna + "Se kundcase"-CTA + "Tillbaka till översikt".
-- **Tangentbord**: ← → mellan slides i kärnsekvensen, `Esc` tar tillbaka till hub från modul, `P` öppnar print-vy.
-- **PDF-export**: `window.print()` mot en print-stylesheet som lägger varje slide/modul på en A4 landscape. Räcker för v1 — säljaren kan skicka PDF efter mötet.
+**Slide 4 — Partnerskap**
+- Ersätt textchips med färgade originalloggor i ett rutnät, grupperat per kategori med tunna avdelare.
+- Hover: lyft + tunn drake-sky-ram. Loggorna får ha färg (matchar PPT).
+- Header får ett kort manifest: "Oberoende · 5 partnerprogram · 20+ plattformar".
 
-## Tekniska val
+**Slide 5 — Kundens fokus**
+- Behåll mörk closing-grå men lägg på drake-deep gradient + data-human bilden större och positionerad som hero-element höger.
+- Modulchips blir större, numrerade kort (01–06) i 3×2 grid med hover-glow, så det blir den faktiska språngbrädan till hub.
+- Lägg in en subtil "→ ESC eller klicka för att öppna områdeskartan" hint.
 
-- **Routing**: TanStack Start file-based routes — `/` (cover, redirect till `/slide/1`), `/slide/$n` (kärnsekvens 1-6), `/hub`, `/modul/$slug`, `/case/$slug`.
-- **Animationer**: `motion/react` (Framer Motion) för slide-transitions via `AnimatePresence`, varianter delade i `src/lib/motion.ts`.
-- **Smooth scroll**: `lenis` initierad i root-layout, pausad på slide-routes (där scroll inte behövs), aktiv på modulsidor.
-- **Design tokens**: portera `colors_and_type.css` till `src/styles.css` som CSS-variabler (oklch där lämpligt, hex där brand kräver exakt match). Roboto + Share laddas via Google Fonts.
-- **Assets**: kopiera logos, Drake Cloud-bakgrunder och Nordics-map från zip till `src/assets/drake/`.
-- **Innehåll som data**: alla slides/moduler/case som typed objects i `src/content/` (`core-slides.ts`, `modules.ts`, `cases.ts`) så icke-tekniska kollegor lätt kan ändra text.
-- **Inget backend / ingen auth / ingen DB** i v1 (Faser 4 — delningsläge — adresseras inte nu).
+**Hub (/hub)**
+- Lyft korten: större siffror, gradient-stroke på hover, micro-icon per modul, partner-chips byts mot små färgade loggor.
+- Multi-case CTA: byt platt drake-deep mot animerad gradient + en metric-strip (3 KPI:er) inline.
 
-## Innehåll (placeholder-kvalitet)
+**Modulsidor (/modul/$slug)**
+- Hero: lägg in modulnummer som gigantisk outline-siffra bakom titeln (typ "06" i 40vw outline).
+- Solution-kort: numrerad badge, ikon, tydligare hover.
+- Outcomes: stora metric-siffror får gradient text-fill (sky → deep).
+- "Plattformar & partners" sektion använder de nya färgade loggorna.
 
-Skrivs på svenska i konsultativ ton baserat på PPTX:en. Exempel-snippet för Dataplattform:
+**Casesidor (/case/$slug)**
+- Cleanup av spacing, metric-strip blir den visuella förankringen, lägg in eyebrow + kundlogga (gråskala) i hero.
 
-> "De flesta organisationer sitter på mer data än de kan använda. Vi bygger plattformen som faktiskt används — skalbar på Snowflake, Fabric eller Databricks, med governance och lineage från dag ett."
+**Navigation & detaljer (globalt)**
+- NavBar: subtilare backdrop, drake-sky underline-indikator på hover.
+- Knappar/CTAs: konsekvent rounded-pill med svag inner-shadow.
+- Lägg till `prefers-reduced-motion` guards på alla blob-/parallax-animationer.
 
-Partnerskapsslidens logos: Microsoft, Google, Qlik, Snowflake, Databricks, mpmX, Planacy, Aimplan, UiPath, DataRobot, Tableau, dbt (textbaserade chips i Drake-stil tills riktiga logos skaffas — markeras tydligt som placeholder). Här kan du eventuellt hämta loggorna att använda själv från internet  
-  
-Var inte rädd för premium parallax och scrolleffekter etc. Det är ett säljstöd men måste inte vara helt 100 kopplat till slide-deck format, utan vi kan utnyttja fördelarna som react/html ger samtidigt som slidekänsla kan bli backbone och den röda tråden så att det fortfarande fungerar bra som ett säljstöd
+## Tillgänglighet
 
-## Leverabler
+- Säkerställ WCAG AA: brödtext på vit ≥ `--da-mid-gray-2` (#646363, 4.5:1 ✓), aldrig drake-sky på vit för text (kontrast bara 2.4:1 — endast för accenter/ikoner/stora rubriker ≥ 24px bold som AA Large).
+- White text på drake-closing (#5E5E5E) klarar inte AA — byt closing-bakgrund till mörkare drake-deep (#0E5F66) eller lägg overlay.
+- Alla nya loggor får alt-text + `aria-label` på länkar.
+- Fokus-ring (drake-sky 2px outline) på alla interaktiva element.
+- Reduced-motion respekteras på parallax/blobs.
 
-- Publicerad Lovable-preview-länk (skickas i Slack-tråden).
-- `/` öppnar cover → kärnsekvensen → hub → moduler.
-- Kort `README.md` i repo-root: hur man lägger till/ändrar slides och moduler genom att redigera filerna i `src/content/`.
-- PDF-export via `Cmd/Ctrl+P` med dedikerad print-stylesheet.
+## Teknik
 
-## Vad som *inte* ingår (v1)
+- Loggor: hämta SVG där möjligt (skarpa, små filer), annars PNG@2x. Lagras i `src/assets/drake/logos/{customers,partners}/`.
+- Ny komponent `LogoStrip.tsx` (gråskala→färg på hover) för kundraden.
+- Ny komponent `PartnerGrid.tsx` (grupperat med kategoriavdelare).
+- Ny komponent `ValueChainFlow.tsx` med SVG-paths + Framer Motion stroke-dash animation.
+- Lägg till `usePrefersReducedMotion` hook och guarda blob/parallax.
+- Inga ändringar av routes/content-struktur — bara presentation/komponenter + assets.
+- Inga backend-/datatillägg.
 
-- Delningsläge / unika kund-URLer / länktracking (Fas 4 — v2).
-- Backend, inloggning, databas.
-- Riktiga partner-logo-bilder (chips/placeholder tills filer levereras).
+## Leveransordning
 
-## Tekniska detaljer
-
-- Filstruktur:
-  ```text
-  src/
-    routes/
-      index.tsx                  // redirect → /slide/1
-      slide.$n.tsx               // kärnsekvens
-      hub.tsx                    // områdeskarta
-      modul.$slug.tsx            // modul one-pager
-      case.$slug.tsx             // kundcase
-      __root.tsx                 // top-bar, Lenis, AnimatePresence wrapper
-    components/
-      drake/  (Logo, SlideShell, ModuleSection, HubMap, NavBar, PrintLayout)
-    content/
-      core-slides.ts  modules.ts  cases.ts  partners.ts
-    lib/
-      motion.ts       lenis.ts
-    styles.css        // Drake tokens + print stylesheet
-    assets/drake/     // logos, cloud-bg, nordics-map
-  ```
-- Dependencies att lägga till: `motion`, `lenis`.
-- TanStack `<Link>` med `preload="intent"` för snabba moduler-byten.
-- Print stylesheet: `@page { size: A4 landscape; margin: 0 }`, döljer nav, forcerar `page-break-after` mellan slides.
-- Tillgänglighet: semantiska `<section>`, fokus-states på alla klickbara kort, tangentbordsnav.
+1. Hämta + optimera alla loggor.
+2. Globala tokens + a11y-fixar (closing-färg, fokus-ringar, reduced-motion).
+3. Slide 1 → 5 i ordning.
+4. Hub + modul + case-polishing.
+5. QA-pass (kolla varje route i preview, kontrast med devtools).
