@@ -9,6 +9,7 @@ import { SlideFooterLogo } from "@/components/drake/SlideFooterLogo";
 import { Logo } from "@/components/drake/Logo";
 import { LogoStrip } from "@/components/drake/LogoStrip";
 import { PartnerGrid } from "@/components/drake/PartnerGrid";
+import { NordicsMap } from "@/components/drake/NordicsMap";
 import { slideVariants, fadeUp, stagger } from "@/lib/motion";
 
 import cloud1 from "@/assets/drake/cloud-1.png";
