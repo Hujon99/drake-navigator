@@ -6,7 +6,7 @@ import { fadeUp } from "@/lib/motion";
 const DEFAULT_CUSTOMERS = [
   "atlascopco",
   "siemens-energy",
-  "alfa-laval",
+  "alfalaval",
   "scania",
   "swedbank",
   "postnord",
