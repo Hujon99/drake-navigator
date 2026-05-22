@@ -496,3 +496,79 @@ function DialogSlide({ slide }: { slide: typeof coreSlides[number] }) {
     </div>
   );
 }
+
+/* ───────────────── Process Intelligence — interactive card with popup ───────────────── */
+function ProcessIntelligenceCard() {
+  const bullets = [
+    "Visualisera verkliga processflöden",
+    "Identifiera avvikelser och flaskhalsar",
+    "Baseras på verklig data (tidstämplar) från ett eller flera system",
+    "Ger mätbar insikt i processernas prestanda",
+    "Stödjer dokumentation, förbättring och automation",
+  ];
+
+  return (
+    <Dialog>
+      <DialogTrigger asChild>
+        <button
+          type="button"
+          className="group relative text-left px-5 py-4 rounded-xl border-2 border-drake-sky bg-gradient-to-br from-drake-sky/10 to-white hover:from-drake-sky/20 hover:shadow-[0_12px_30px_-12px_rgba(80,188,189,0.6)] hover:-translate-y-0.5 transition-all overflow-hidden"
+        >
+          {/* "Klicka" badge */}
+          <span className="absolute top-2 right-2 inline-flex items-center gap-1 rounded-full bg-drake-deep text-white text-[9px] font-display uppercase tracking-[0.14em] px-2 py-0.5 shadow-md">
+            <Plus size={10} strokeWidth={3} /> Läs mer
+          </span>
+          {/* Pulsing dot indicator */}
+          <span className="absolute top-3 left-3 flex h-2 w-2">
+            <span className="da-pulse-ring absolute inline-flex h-full w-full rounded-full bg-drake-sky opacity-75" />
+            <span className="relative inline-flex rounded-full h-2 w-2 bg-drake-deep" />
+          </span>
+          <p className="font-display uppercase tracking-wide text-sm text-drake-deep pl-5">
+            Process Intelligence
+          </p>
+          <p className="text-xs text-drake-mid mt-1 pl-5">
+            Synliggör hur processerna faktiskt går
+          </p>
+        </button>
+      </DialogTrigger>
+
+      <DialogContent className="max-w-2xl border-drake-tint-strong">
+        <DialogHeader>
+          <div className="flex items-center gap-2 mb-2">
+            <span className="h-px w-8 bg-drake-sky" />
+            <p className="da-eyebrow text-drake-mid">Genomgående lager</p>
+          </div>
+          <DialogTitle className="font-display uppercase tracking-tight text-3xl text-drake-deep">
+            Vad är Process Intelligence?
+          </DialogTitle>
+          <DialogDescription className="text-drake-mid pt-2 text-base leading-relaxed">
+            Med riktig event-data från era system kan vi visualisera hur processerna
+            verkligen körs — inte hur ni tror att de körs.
+          </DialogDescription>
+        </DialogHeader>
+
+        <ul className="mt-4 space-y-3">
+          {bullets.map((b) => (
+            <li key={b} className="flex gap-3 items-start">
+              <CheckCircle2
+                size={20}
+                className="text-drake-sky mt-0.5 flex-shrink-0"
+              />
+              <span className="text-drake-ink leading-relaxed">{b}</span>
+            </li>
+          ))}
+        </ul>
+
+        <div className="mt-6 p-4 rounded-lg bg-drake-tint-soft border border-drake-tint-strong">
+          <p className="text-xs uppercase tracking-[0.18em] font-display text-drake-deep mb-1">
+            Find your happy path
+          </p>
+          <p className="text-sm text-drake-mid">
+            Från event-loggar till mätbar förbättring — vi hjälper er hitta
+            vägen från det faktiska flödet till det optimala.
+          </p>
+        </div>
+      </DialogContent>
+    </Dialog>
+  );
+}
