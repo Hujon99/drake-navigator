@@ -20,14 +20,29 @@ export interface BrandMeta {
 // Swedish customer brands — used in slide 2 LogoStrip
 export const CUSTOMERS: Record<string, BrandMeta> = {
   atlascopco: { name: "Atlas Copco", color: "#1D4F91", font: "sans", upper: false },
-  "siemens-energy": { name: "SIEMENS energy", color: "#009999", font: "sans", upper: false },
-  "alfa-laval": { name: "Alfa Laval", color: "#003B71", font: "sans", upper: false },
-  scania: { name: "SCANIA", color: "#041E42", font: "sans" },
+  "siemens-energy": { name: "Siemens Energy", color: "#009999", font: "sans", upper: false },
+  alfalaval: { name: "Alfa Laval", color: "#003B71", font: "sans", upper: false },
+  scania: { name: "Scania", color: "#041E42", font: "sans", upper: false },
   swedbank: { name: "Swedbank", color: "#FF5F00", font: "sans", upper: false },
   postnord: { name: "PostNord", color: "#005CA9", font: "sans", upper: false },
   migrationsverket: { name: "Migrationsverket", color: "#005AA0", font: "sans", upper: false },
   skatteverket: { name: "Skatteverket", color: "#1F3864", font: "sans", upper: false },
 };
+
+// Vite eager-glob real SVG files for customer brands
+const customerSvgs = import.meta.glob("../assets/drake/logos/customers/*.svg", {
+  eager: true,
+  query: "?url",
+  import: "default",
+}) as Record<string, string>;
+
+export function getCustomerSvg(key: string): string | undefined {
+  const match = Object.entries(customerSvgs).find(([path]) =>
+    path.toLowerCase().endsWith(`/${key}.svg`)
+  );
+  return match?.[1];
+}
+
 
 // Partner / tech brands — used in slide 4 PartnerGrid
 export const PARTNERS: Record<string, BrandMeta> = {
