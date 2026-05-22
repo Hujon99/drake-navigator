@@ -9,11 +9,12 @@ import { SlideFooterLogo } from "@/components/drake/SlideFooterLogo";
 import { Logo } from "@/components/drake/Logo";
 import { LogoStrip } from "@/components/drake/LogoStrip";
 import { PartnerGrid } from "@/components/drake/PartnerGrid";
+import { NordicsMap } from "@/components/drake/NordicsMap";
 import { slideVariants, fadeUp, stagger } from "@/lib/motion";
 
 import cloud1 from "@/assets/drake/cloud-1.png";
 
-import nordics from "@/assets/drake/nordics-map.png";
+
 import dataHuman from "@/assets/drake/data-human.png";
 
 export const Route = createFileRoute("/slide/$n")({
@@ -252,12 +253,6 @@ function WhoSlide({ slide }: { slide: typeof coreSlides[number] }) {
     "Solution Architects",
     "Low Code Engineers",
   ];
-  const cities = [
-    { name: "Stockholm", top: "44%", left: "55%" },
-    { name: "Göteborg", top: "60%", left: "38%" },
-    { name: "Linköping", top: "55%", left: "52%" },
-    { name: "Jönköping", top: "60%", left: "48%" },
-  ];
 
   return (
     <div className="w-full min-h-screen bg-white flex flex-col">
@@ -292,20 +287,14 @@ function WhoSlide({ slide }: { slide: typeof coreSlides[number] }) {
           </motion.div>
         </motion.div>
 
-        {/* Right: map with pulsing dots */}
-        <div className="relative bg-drake-tint-soft overflow-hidden flex items-center justify-center p-12 border-l border-drake-rule">
-          <div className="absolute inset-0 opacity-30 bg-gradient-to-br from-drake-sky/20 to-transparent" />
-          <div className="relative w-full max-w-md">
-            <img src={nordics} alt="Drake Analytics kontor i Norden" className="w-full object-contain" />
-            {cities.map((c) => (
-              <div key={c.name} className="absolute -translate-x-1/2 -translate-y-1/2" style={{ top: c.top, left: c.left }}>
-                <div className="relative w-3 h-3">
-                  <span className="da-pulse-ring" aria-hidden />
-                  <span className="absolute inset-0 rounded-full bg-drake-deep ring-2 ring-white" />
-                </div>
-                <span className="absolute left-5 top-1/2 -translate-y-1/2 text-[11px] font-display uppercase tracking-wide text-drake-deep whitespace-nowrap">{c.name}</span>
-              </div>
-            ))}
+        {/* Right: real Nordics map filling the panel */}
+        <div className="relative bg-drake-tint-soft overflow-hidden border-l border-drake-rule min-h-[420px]">
+          <NordicsMap />
+          {/* Soft brand overlay so the map ties into the palette */}
+          <div className="pointer-events-none absolute inset-0 bg-gradient-to-br from-drake-sky/10 via-transparent to-drake-deep/15 mix-blend-multiply" />
+          {/* Caption badge */}
+          <div className="absolute top-6 left-6 bg-white/90 backdrop-blur px-4 py-2 rounded-md border border-drake-rule shadow-sm">
+            <p className="da-eyebrow text-drake-deep text-[10px]">4 kontor · Sverige</p>
           </div>
         </div>
       </div>
@@ -319,6 +308,7 @@ function WhoSlide({ slide }: { slide: typeof coreSlides[number] }) {
     </div>
   );
 }
+
 
 /* ───────────────── Slide 3: Value chain ───────────────── */
 function ChainSlide({ slide }: { slide: typeof coreSlides[number] }) {

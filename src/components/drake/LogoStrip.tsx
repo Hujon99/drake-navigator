@@ -6,7 +6,7 @@ import { fadeUp } from "@/lib/motion";
 const DEFAULT_CUSTOMERS = [
   "atlascopco",
   "siemens-energy",
-  "alfa-laval",
+  "alfalaval",
   "scania",
   "swedbank",
   "postnord",
@@ -28,17 +28,17 @@ export function LogoStrip({
   return (
     <motion.div variants={fadeUp} className={className}>
       <p className="da-eyebrow text-drake-mid mb-5">{eyebrow}</p>
-      <div className="flex flex-wrap items-center gap-x-8 gap-y-4">
+      <div className="flex flex-wrap items-center gap-x-10 gap-y-5">
         {brands.map((b) => {
           const meta = CUSTOMERS[b];
           if (!meta) return null;
           return (
             <div
               key={b}
-              className="group transition-all duration-300 grayscale opacity-70 hover:grayscale-0 hover:opacity-100 hover:-translate-y-0.5"
+              className="group transition-all duration-300 grayscale opacity-60 hover:grayscale-0 hover:opacity-100 hover:-translate-y-0.5"
               title={meta.name}
             >
-              <BrandLogo brand={b} kind="customer" tone="color" size="md" />
+              <BrandLogo brand={b} kind="customer" tone="color" size="lg" />
             </div>
           );
         })}
