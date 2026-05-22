@@ -91,23 +91,23 @@ export function PartnerGrid() {
       variants={stagger(0.03)}
       initial="initial"
       animate="animate"
-      className="grid md:grid-cols-2 gap-x-10 gap-y-8"
+      className="grid grid-cols-2 lg:grid-cols-3 gap-x-6 gap-y-4"
     >
       {PARTNER_GROUPS.map((g) => (
         <motion.div key={g.label} variants={fadeUp}>
-          <div className="flex items-center gap-3 mb-3">
-            <span className="h-px w-8 bg-drake-sky" />
-            <p className="da-eyebrow text-drake-mid">{g.label}</p>
+          <div className="flex items-center gap-2 mb-2">
+            <span className="h-px w-6 bg-drake-sky" />
+            <p className="da-eyebrow text-drake-mid text-[10px]">{g.label}</p>
           </div>
-          <div className="flex flex-wrap gap-2">
+          <div className="flex flex-wrap gap-1.5">
             {g.items.map((t) => (
               <span
                 key={t.name}
-                className="inline-flex items-center gap-2 rounded-md border border-drake-line bg-white px-3 py-1.5 text-[13px] font-medium text-drake-ink hover:border-drake-sky hover:shadow-[0_4px_16px_-8px_rgba(80,188,189,0.45)] hover:-translate-y-0.5 transition-all"
+                className="inline-flex items-center gap-1.5 rounded-md border border-drake-line bg-white px-2 py-1 text-[11px] font-medium text-drake-ink hover:border-drake-sky hover:shadow-[0_4px_16px_-8px_rgba(80,188,189,0.45)] hover:-translate-y-0.5 transition-all"
               >
                 <span
                   aria-hidden
-                  className="inline-block w-2 h-2 rounded-full flex-shrink-0"
+                  className="inline-block w-1.5 h-1.5 rounded-full flex-shrink-0"
                   style={{ backgroundColor: t.color, boxShadow: `0 0 0 2px ${t.color}1f` }}
                 />
                 {t.name}
