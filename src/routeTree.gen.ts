@@ -9,22 +9,22 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as RapportRouteImport } from './routes/rapport'
 import { Route as HubRouteImport } from './routes/hub'
-import { Route as ExportPrintRouteImport } from './routes/export-print'
 import { Route as ExportRouteImport } from './routes/export'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as SlideNRouteImport } from './routes/slide.$n'
 import { Route as ModulSlugRouteImport } from './routes/modul.$slug'
 import { Route as CaseSlugRouteImport } from './routes/case.$slug'
 
+const RapportRoute = RapportRouteImport.update({
+  id: '/rapport',
+  path: '/rapport',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const HubRoute = HubRouteImport.update({
   id: '/hub',
   path: '/hub',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const ExportPrintRoute = ExportPrintRouteImport.update({
-  id: '/export-print',
-  path: '/export-print',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ExportRoute = ExportRouteImport.update({
@@ -56,8 +56,8 @@ const CaseSlugRoute = CaseSlugRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/export': typeof ExportRoute
-  '/export-print': typeof ExportPrintRoute
   '/hub': typeof HubRoute
+  '/rapport': typeof RapportRoute
   '/case/$slug': typeof CaseSlugRoute
   '/modul/$slug': typeof ModulSlugRoute
   '/slide/$n': typeof SlideNRoute
@@ -65,8 +65,8 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/export': typeof ExportRoute
-  '/export-print': typeof ExportPrintRoute
   '/hub': typeof HubRoute
+  '/rapport': typeof RapportRoute
   '/case/$slug': typeof CaseSlugRoute
   '/modul/$slug': typeof ModulSlugRoute
   '/slide/$n': typeof SlideNRoute
@@ -75,8 +75,8 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/export': typeof ExportRoute
-  '/export-print': typeof ExportPrintRoute
   '/hub': typeof HubRoute
+  '/rapport': typeof RapportRoute
   '/case/$slug': typeof CaseSlugRoute
   '/modul/$slug': typeof ModulSlugRoute
   '/slide/$n': typeof SlideNRoute
@@ -86,8 +86,8 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/export'
-    | '/export-print'
     | '/hub'
+    | '/rapport'
     | '/case/$slug'
     | '/modul/$slug'
     | '/slide/$n'
@@ -95,8 +95,8 @@ export interface FileRouteTypes {
   to:
     | '/'
     | '/export'
-    | '/export-print'
     | '/hub'
+    | '/rapport'
     | '/case/$slug'
     | '/modul/$slug'
     | '/slide/$n'
@@ -104,8 +104,8 @@ export interface FileRouteTypes {
     | '__root__'
     | '/'
     | '/export'
-    | '/export-print'
     | '/hub'
+    | '/rapport'
     | '/case/$slug'
     | '/modul/$slug'
     | '/slide/$n'
@@ -114,8 +114,8 @@ export interface FileRouteTypes {
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   ExportRoute: typeof ExportRoute
-  ExportPrintRoute: typeof ExportPrintRoute
   HubRoute: typeof HubRoute
+  RapportRoute: typeof RapportRoute
   CaseSlugRoute: typeof CaseSlugRoute
   ModulSlugRoute: typeof ModulSlugRoute
   SlideNRoute: typeof SlideNRoute
@@ -123,18 +123,18 @@ export interface RootRouteChildren {
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/rapport': {
+      id: '/rapport'
+      path: '/rapport'
+      fullPath: '/rapport'
+      preLoaderRoute: typeof RapportRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/hub': {
       id: '/hub'
       path: '/hub'
       fullPath: '/hub'
       preLoaderRoute: typeof HubRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/export-print': {
-      id: '/export-print'
-      path: '/export-print'
-      fullPath: '/export-print'
-      preLoaderRoute: typeof ExportPrintRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/export': {
@@ -178,8 +178,8 @@ declare module '@tanstack/react-router' {
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   ExportRoute: ExportRoute,
-  ExportPrintRoute: ExportPrintRoute,
   HubRoute: HubRoute,
+  RapportRoute: RapportRoute,
   CaseSlugRoute: CaseSlugRoute,
   ModulSlugRoute: ModulSlugRoute,
   SlideNRoute: SlideNRoute,
