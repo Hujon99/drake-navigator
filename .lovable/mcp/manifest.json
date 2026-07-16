@@ -1,0 +1,115 @@
+{
+  "version": 1,
+  "sdk_version": "0.22.2",
+  "path": "/mcp",
+  "auth": {
+    "type": "none"
+  },
+  "mcp": {
+    "server": {
+      "name": "drake-analytics-mcp",
+      "version": "0.1.0",
+      "title": "Drake Analytics"
+    },
+    "tools": [
+      {
+        "name": "list_modules",
+        "title": "List modules",
+        "description": "List Drake Analytics service modules (Dataplattform, Process Intelligence, Applications, BI & Analytics, Planning, Data Strategy) with slug, number, title and tagline.",
+        "annotations": {
+          "readOnlyHint": true,
+          "idempotentHint": true,
+          "openWorldHint": false
+        },
+        "inputSchema": {
+          "$schema": "http://json-schema.org/draft-07/schema#",
+          "type": "object",
+          "properties": {}
+        },
+        "outputSchema": null
+      },
+      {
+        "name": "get_module",
+        "title": "Get module",
+        "description": "Get full content for one Drake Analytics module by slug: problem, solution blocks, outcomes, next step, partners and the linked customer case slug.",
+        "annotations": {
+          "readOnlyHint": true,
+          "idempotentHint": true,
+          "openWorldHint": false
+        },
+        "inputSchema": {
+          "type": "object",
+          "properties": {
+            "slug": {
+              "type": "string",
+              "description": "Module slug, e.g. 'dataplattform', 'process-intelligence', 'applications', 'bi-analytics', 'planning', 'data-strategy'."
+            }
+          },
+          "required": [
+            "slug"
+          ],
+          "additionalProperties": false,
+          "$schema": "http://json-schema.org/draft-07/schema#"
+        },
+        "outputSchema": null
+      },
+      {
+        "name": "list_cases",
+        "title": "List customer cases",
+        "description": "List Drake Analytics customer cases with slug, client, title and the modules each case relates to.",
+        "annotations": {
+          "readOnlyHint": true,
+          "idempotentHint": true,
+          "openWorldHint": false
+        },
+        "inputSchema": {
+          "$schema": "http://json-schema.org/draft-07/schema#",
+          "type": "object",
+          "properties": {}
+        },
+        "outputSchema": null
+      },
+      {
+        "name": "get_case",
+        "title": "Get customer case",
+        "description": "Get full content for one Drake Analytics customer case by slug: challenge, approach, results and technology used.",
+        "annotations": {
+          "readOnlyHint": true,
+          "idempotentHint": true,
+          "openWorldHint": false
+        },
+        "inputSchema": {
+          "type": "object",
+          "properties": {
+            "slug": {
+              "type": "string",
+              "description": "Case slug, e.g. 'siemens-energy', 'partner-inkasso', 'abbvie'."
+            }
+          },
+          "required": [
+            "slug"
+          ],
+          "additionalProperties": false,
+          "$schema": "http://json-schema.org/draft-07/schema#"
+        },
+        "outputSchema": null
+      },
+      {
+        "name": "list_core_slides",
+        "title": "List core slides",
+        "description": "List the core pitch slides of the Drake Analytics deck (cover, who we are, value chain, partners) with eyebrow, title and body copy.",
+        "annotations": {
+          "readOnlyHint": true,
+          "idempotentHint": true,
+          "openWorldHint": false
+        },
+        "inputSchema": {
+          "$schema": "http://json-schema.org/draft-07/schema#",
+          "type": "object",
+          "properties": {}
+        },
+        "outputSchema": null
+      }
+    ]
+  }
+}
